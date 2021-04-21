@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 @Schema(description = "Проект")
-class ProjectRequestDto {
+public class ProjectRequestDto {
 
     @Schema(description = "ID проекта")
     private Integer id;
