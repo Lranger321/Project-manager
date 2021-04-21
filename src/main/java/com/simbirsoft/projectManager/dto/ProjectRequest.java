@@ -1,11 +1,14 @@
-package com.simbirsoft.projectManager.rest.dto;
+package com.simbirsoft.projectManager.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
 @Schema(description = "Проект")
-public class ProjectResponseDto {
+public class ProjectRequest {
+
+    @Schema(description = "ID проекта")
+    private Integer id;
 
     @Schema(description = "Название проекта")
     private String name;
@@ -19,14 +22,23 @@ public class ProjectResponseDto {
     @Schema(description = "Время релиза проекта")
     private LocalDateTime releaseTime;
 
-    public ProjectResponseDto() {
+    ProjectRequest() {
     }
 
-    public ProjectResponseDto(String name, String status, LocalDateTime startTime, LocalDateTime releaseTime) {
+    ProjectRequest(Integer id, String name, String status, LocalDateTime startTime, LocalDateTime releaseTime) {
+        this.id = id;
         this.name = name;
         this.status = status;
         this.startTime = startTime;
         this.releaseTime = releaseTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

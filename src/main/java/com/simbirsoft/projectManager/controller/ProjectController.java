@@ -1,8 +1,8 @@
 package com.simbirsoft.projectManager.controller;
 
+import com.simbirsoft.projectManager.dto.ProjectRequest;
+import com.simbirsoft.projectManager.dto.ProjectResponse;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
-import com.simbirsoft.projectManager.rest.dto.ProjectRequestDto;
-import com.simbirsoft.projectManager.rest.dto.ProjectResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import java.util.Map;
 @RequestMapping("api/project")
 public class ProjectController {
 
-    private final Map<String, ProjectResponseDto> repository;
+    private final Map<String, ProjectResponse> repository;
 
-    public ProjectController(Map<String, ProjectResponseDto> repository) {
+    public ProjectController(Map<String, ProjectResponse> repository) {
         this.repository = repository;
     }
 
@@ -29,25 +29,25 @@ public class ProjectController {
 
     @Operation(summary = "Добавить проект")
     @PostMapping(value = "/projects")
-    public ResponseEntity<ProjectResponseDto> addProject(@RequestBody ProjectRequestDto projectRequestDto) {
+    public ResponseEntity<ProjectResponse> addProject(@RequestBody ProjectRequest projectRequestDto) {
         //TODO работа с БД
 
-        return ResponseEntity.ok().body(new ProjectResponseDto());
+        return ResponseEntity.ok().body(new ProjectResponse());
     }
 
     @Operation(summary = "Обновить информацию о проекте")
     @PostMapping(value = "/projects/{id}")
-    public ResponseEntity<ProjectResponseDto> setProject(@RequestBody ProjectRequestDto projectRequestDto) {
+    public ResponseEntity<ProjectResponse> setProject(@RequestBody ProjectRequest projectRequestDto) {
         //TODO работа с БД
 
-        return ResponseEntity.ok().body(new ProjectResponseDto());
+        return ResponseEntity.ok().body(new ProjectResponse());
     }
 
     @GetMapping(value = "{key}")
-    public ResponseEntity<ProjectResponseDto> getSimpleDto(@PathVariable("key") String key) {
+    public ResponseEntity<ProjectResponse> getSimpleDto(@PathVariable("key") String key) {
         // TODO ?
 
-        if (repository == null ) throw new ProjectNotFoundException();
+        if (repository == null) throw new ProjectNotFoundException();
 
         return ResponseEntity.ok(repository != null ? repository.get(key) : null);
     }
