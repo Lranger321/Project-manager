@@ -1,5 +1,6 @@
-package com.simbirsoft.projectManager.rest;
+package com.simbirsoft.projectManager.controller;
 
+import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import com.simbirsoft.projectManager.rest.dto.ProjectRequestDto;
 import com.simbirsoft.projectManager.rest.dto.ProjectResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,6 +46,8 @@ public class ProjectController {
     @GetMapping(value = "{key}")
     public ResponseEntity<ProjectResponseDto> getSimpleDto(@PathVariable("key") String key) {
         // TODO ?
+
+        if (repository == null ) throw new ProjectNotFoundException();
 
         return ResponseEntity.ok(repository != null ? repository.get(key) : null);
     }
