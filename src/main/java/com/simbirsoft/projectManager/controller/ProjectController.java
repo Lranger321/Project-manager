@@ -17,12 +17,13 @@ import java.util.Map;
 
 @Tag(name = "Управление проектом")
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/projects")
 public class ProjectController {
 
     //временное хранилище
-    //TODO: настроить репозиторий для работы с БД
+    //TODO: создать сервисы и убрать все лишнее из контроллера
     private final Map<Integer, ProjectResponse> repository;
+
 
     public ProjectController(Map<Integer, ProjectResponse> repository) {
         this.repository = repository;
@@ -33,7 +34,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Получить список проектов")
-    @GetMapping(value = "/projects")
+    @GetMapping(value = "/")
     public ResponseEntity<List<ProjectResponse>> getAllProjects() {
         // TODO: запрашивать все экземпляры проектов из БД
         if (repository == null) throw new ProjectNotFoundException();
@@ -42,7 +43,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Получить проект по id")
-    @GetMapping(value = "/projects/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ProjectResponse> getProjectById(@PathVariable("id") int id) {
         // TODO: запрашивать проект по id из БД
         //TODO: добавить выброс исключения, если запись не найдена
@@ -51,7 +52,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Добавить проект")
-    @PostMapping(value = "/projects")
+    @PostMapping(value = "/")
     public ResponseEntity<ProjectResponse> addProject(@RequestBody ProjectRequest projectRequestDto) {
         //TODO: добавлять запись в БД
         ProjectResponse response = new ProjectResponse(
@@ -64,7 +65,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Обновить данные о проекте")
-    @PutMapping(value = "/projects/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<ProjectResponse> updateProject(@RequestBody ProjectRequest projectRequestDto) {
         //TODO: обновлять запись в БД
         //TODO: добавить выброс исключения, если запись не найдена
@@ -78,7 +79,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Удалить проект")
-    @DeleteMapping(value = "/projects/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Integer> deleteProject(@PathVariable("id") int id) {
         //TODO: удалять запись из БД
         //TODO: добавить выброс исключения, если запись не найдена
