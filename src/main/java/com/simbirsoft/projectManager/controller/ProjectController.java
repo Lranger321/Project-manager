@@ -36,7 +36,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Обновить информацию о проекте")
-    @PostMapping(value = "/projects/{id}")
+    @PutMapping(value = "/projects")
     public ResponseEntity<ProjectResponse> setProject(@RequestBody ProjectRequest projectRequestDto) {
         //TODO работа с БД
 
