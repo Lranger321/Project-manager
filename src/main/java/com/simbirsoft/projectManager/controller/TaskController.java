@@ -1,7 +1,5 @@
 package com.simbirsoft.projectManager.controller;
 
-import com.simbirsoft.projectManager.dto.ProjectRequest;
-import com.simbirsoft.projectManager.dto.ProjectResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
