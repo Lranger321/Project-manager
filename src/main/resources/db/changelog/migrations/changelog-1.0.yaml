@@ -1,0 +1,222 @@
+databaseChangeLog:
+- changeSet:
+    id: 1619125400149-1
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: project_pkey
+            name: id
+            type: UUID
+        - column:
+            name: date_end
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_start
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: status
+            type: VARCHAR(12)
+        tableName: project
+- changeSet:
+    id: 1619125400149-2
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: role
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: project_to_user_pkey
+            name: user_id
+            type: UUID
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: project_to_user_pkey
+            name: project_id
+            type: UUID
+        tableName: project_to_user
+- changeSet:
+    id: 1619125400149-3
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: release_pkey
+            name: id
+            type: UUID
+        - column:
+            name: date_end
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_start
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: version
+            type: VARCHAR(255)
+        - column:
+            name: project_id
+            type: UUID
+        tableName: release
+- changeSet:
+    id: 1619125400149-4
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: task_pkey
+            name: id
+            type: UUID
+        - column:
+            name: description
+            type: VARCHAR(255)
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: priority
+            type: VARCHAR(255)
+        - column:
+            name: status
+            type: VARCHAR(12)
+        - column:
+            name: project_id
+            type: UUID
+        - column:
+            name: release_id
+            type: UUID
+        - column:
+            name: user_id
+            type: UUID
+        tableName: task
+- changeSet:
+    id: 1619125400149-5
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: user_pkey
+            name: id
+            type: UUID
+        - column:
+            name: date_register
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: full_name
+            type: VARCHAR(255)
+        - column:
+            name: password
+            type: VARCHAR(255)
+        tableName: user
+- changeSet:
+    id: 1619125400149-6
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: task
+        constraintName: fk2hsytmxysatfvt0p1992cw449
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: user
+        validate: true
+- changeSet:
+    id: 1619125400149-7
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: project_id
+        baseTableName: project_to_user
+        constraintName: fk3chhctko8nk7cxmp9ru9ktknr
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: project
+        validate: true
+- changeSet:
+    id: 1619125400149-8
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: project_to_user
+        constraintName: fk46fg4ohn72lh6j8eeyrxwy90j
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: user
+        validate: true
+- changeSet:
+    id: 1619125400149-9
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: release_id
+        baseTableName: task
+        constraintName: fkdgofiix8cubb3ajfqxej7erp7
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: release
+        validate: true
+- changeSet:
+    id: 1619125400149-10
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: project_id
+        baseTableName: release
+        constraintName: fkhmai3uwogjte55w6h0t6b6inh
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: project
+        validate: true
+- changeSet:
+    id: 1619125400149-11
+    author: Shafranov Danila (VirtualPower1x)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: project_id
+        baseTableName: task
+        constraintName: fkk8qrwowg31kx7hp93sru1pdqa
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: project
+        validate: true
