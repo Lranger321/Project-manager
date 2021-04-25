@@ -1,10 +1,10 @@
 package com.simbirsoft.projectManager.service.impl;
 
 import com.simbirsoft.projectManager.dto.request.ProjectRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectAddResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectAddResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectDeleteResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectUpdateResponse;
 import com.simbirsoft.projectManager.entity.ProjectEntity;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         ProjectEntity newEntity = converter.convertToProjectEntity(oldEntity.get(),request);
         projectRepository.save(newEntity);
-        return null;
+        return new ProjectUpdateResponse(true);
     }
 
     @Override

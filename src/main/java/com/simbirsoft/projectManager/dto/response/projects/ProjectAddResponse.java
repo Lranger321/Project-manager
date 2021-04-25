@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.dto.response;
+package com.simbirsoft.projectManager.dto.response.projects;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

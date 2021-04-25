@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.controller;
 
 import com.simbirsoft.projectManager.dto.request.ProjectRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

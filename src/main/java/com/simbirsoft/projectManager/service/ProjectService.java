@@ -1,12 +1,10 @@
 package com.simbirsoft.projectManager.service;
 
 import com.simbirsoft.projectManager.dto.request.ProjectRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectAddResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
-import com.simbirsoft.projectManager.dto.response.ProjectUpdateResponse;
-
-import java.util.UUID;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectAddResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectDeleteResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectUpdateResponse;
 
 public interface ProjectService {
 

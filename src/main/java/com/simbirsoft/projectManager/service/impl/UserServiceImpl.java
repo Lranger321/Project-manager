@@ -1,10 +1,10 @@
 package com.simbirsoft.projectManager.service.impl;
 
 import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.GetUserResponse;
-import com.simbirsoft.projectManager.dto.response.UserDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.UserRegisterResponse;
-import com.simbirsoft.projectManager.dto.response.UserUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
 import com.simbirsoft.projectManager.entity.UserEntity;
 import com.simbirsoft.projectManager.exception.UserNotFoundException;
 import com.simbirsoft.projectManager.repository.UserRepository;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public GetUserResponse getUserById(String id) {
+    public UserResponse getUserById(String id) {
         UUID uuid = UUID.fromString(id);
         Optional<UserEntity> user = userRepository.findById(uuid);
         if(user.isEmpty()){

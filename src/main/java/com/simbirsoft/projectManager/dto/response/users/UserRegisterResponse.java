@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.dto.response;
+package com.simbirsoft.projectManager.dto.response.users;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
