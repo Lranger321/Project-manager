@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "project")
-public class ProjectEntity {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +26,14 @@ public class ProjectEntity {
     @Column(name = "date_end")
     private LocalDateTime dateEnd;
 
-    @OneToMany(mappedBy = "projectToUserID.project", cascade = CascadeType.ALL)
-    private List<ProjectToUserEntity> projectToUserEntities = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private List<Task> tasks;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<ReleaseEntity> releaseEntities = new ArrayList<>();
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<TaskEntity> taskEntities = new ArrayList<>();
-
-    public ProjectEntity() {
+    public Project() {
     }
 
-    public ProjectEntity(String name, ProjectStatus status, LocalDateTime dateStart, LocalDateTime dateEnd) {
+    public Project(String name, ProjectStatus status, LocalDateTime dateStart, LocalDateTime dateEnd) {
         this.name = name;
         this.status = status;
         this.dateStart = dateStart;
@@ -85,27 +80,11 @@ public class ProjectEntity {
         this.dateEnd = dateEnd;
     }
 
-    public List<ProjectToUserEntity> getProjectToUserEntities() {
-        return projectToUserEntities;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setProjectToUserEntities(List<ProjectToUserEntity> projectToUserEntities) {
-        this.projectToUserEntities = projectToUserEntities;
-    }
-
-    public List<ReleaseEntity> getReleaseEntities() {
-        return releaseEntities;
-    }
-
-    public void setReleaseEntities(List<ReleaseEntity> releaseEntities) {
-        this.releaseEntities = releaseEntities;
-    }
-
-    public List<TaskEntity> getTaskEntities() {
-        return taskEntities;
-    }
-
-    public void setTaskEntities(List<TaskEntity> taskEntities) {
-        this.taskEntities = taskEntities;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

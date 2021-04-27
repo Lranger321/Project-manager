@@ -1,14 +1,11 @@
 package com.simbirsoft.projectManager.service.impl;
 
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.projects.ProjectAddResponse;
-import com.simbirsoft.projectManager.dto.response.projects.ProjectDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskAddResponse;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskResponse;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskUpdateResponse;
-import com.simbirsoft.projectManager.entity.ProjectEntity;
-import com.simbirsoft.projectManager.entity.TaskEntity;
+import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import com.simbirsoft.projectManager.repository.TaskRepository;
 import com.simbirsoft.projectManager.service.Converter;
@@ -33,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponse getTaskById(String id) {
         UUID uuid = UUID.fromString(id);
-        Optional<TaskEntity> optionalTaskEntity = taskRepository.findById(uuid);
+        Optional<Task> optionalTaskEntity = taskRepository.findById(uuid);
         if (optionalTaskEntity.isEmpty()) {
             throw new ProjectNotFoundException();
         }
@@ -42,7 +39,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskAddResponse addTask(TaskRequest request) {
-        TaskEntity project = converter.convertToTaskEntity(request);
+        Task project = converter.convertToTaskEntity(request);
         taskRepository.save(project);
         return new TaskAddResponse(true);
     }
@@ -50,11 +47,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskUpdateResponse updateTask(String id, TaskRequest request) {
         UUID uuid = UUID.fromString(id);
-        Optional<TaskEntity> oldEntity = taskRepository.findById(uuid);
+        Optional<Task> oldEntity = taskRepository.findById(uuid);
         if (oldEntity.isEmpty()) {
             throw new ProjectNotFoundException();
         }
-        TaskEntity newEntity = converter.convertToTaskEntity(oldEntity.get(),request);
+        Task newEntity = converter.convertToTaskEntity(oldEntity.get(),request);
         taskRepository.save(newEntity);
         return null;
     }
