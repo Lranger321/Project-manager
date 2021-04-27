@@ -1,0 +1,138 @@
+databaseChangeLog:
+- changeSet:
+    id: addAutoIncrement
+    author: Nikita Kozlov (Lranger321)
+    changes:
+      - sql: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+      - sql: ALTER TABLE project ALTER COLUMN id SET DEFAULT uuid_generate_v4()
+      - sql: ALTER TABLE users ALTER COLUMN id SET DEFAULT uuid_generate_v4()
+      - sql: ALTER TABLE task ALTER COLUMN id SET DEFAULT uuid_generate_v4()
+      - sql: ALTER TABLE release ALTER COLUMN id SET DEFAULT uuid_generate_v4()
+- changeSet:
+      id: Testing data
+      author: Nikita Kozlov (Lranger321)
+      runOnChange: true
+      changes:
+        - insert:
+            columns:
+              - column:
+                    name: id
+                    value: 749c62bc-f960-4511-961f-ffa98c655cef
+              - column:
+                  name: date_end
+                  value: NOW()
+              - column:
+                  name: date_start
+                  value: NOW()
+              - column:
+                  name: name
+                  value: TestId1
+              - column:
+                  name: status
+                  value: IN_PROGRESS
+            schemaName: public
+            tableName: project
+        - insert:
+            catalogName: project
+            columns:
+              - column:
+                  name: id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cea
+              - column:
+                  name: date_end
+                  value: NOW()
+              - column:
+                  name: date_start
+                  value: NOW()
+              - column:
+                  name: name
+                  value: TestId2
+              - column:
+                  name: status
+                  value: IN_PROGRESS
+            schemaName: public
+            tableName: project
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 749c62bc-f960-4511-961f-ffa98c655ceb
+              - column:
+                  name: date_register
+                  value: NOW()
+              - column:
+                  name: email
+                  value: root@gmail.com
+              - column:
+                  name: full_name
+                  value: Full name root
+              - column:
+                  name: password
+                  value: root
+            schemaName: public
+            tableName: users
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+              - column:
+                  name: date_register
+                  value: NOW()
+              - column:
+                  name: email
+                  value: admin@gmail.com
+              - column:
+                  name: full_name
+                  value: Full name admin
+              - column:
+                  name: password
+                  value: admin
+            schemaName: public
+            tableName: users
+- changeSet:
+    id: Testing data project_to_user
+    author: Nikita Kozlov (Lranger321)
+    runOnChange: true
+    changes:
+        - insert:
+            columns:
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cef
+              - column:
+                  name: role
+                  value: user
+            schemaName: public
+            tableName: project_to_user
+        - insert:
+            catalogName: project_to_user
+            columns:
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cea
+              - column:
+                  name: role
+                  value: admin
+            schemaName: public
+            tableName: project_to_user
+        - insert:
+            catalogName: project_to_user
+            columns:
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655ceb
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cef
+              - column:
+                  name: role
+                  value: admin
+            schemaName: public
+            tableName: project_to_user

@@ -4,12 +4,11 @@ import org.springframework.scheduling.config.Task;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,15 +21,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name="date_register", nullable = false)
+    @Column(name = "date_register", nullable = false)
     private LocalDateTime dateRegister;
 
-    @Column(name="full_name", nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "project_to_user",joinColumns = {@JoinColumn(name = "project_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
     private List<Project> projects;
 
     public UUID getId() {
