@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 @Schema(description = "Проект")
 public class ProjectRequest {
 
+    private String id;
+
     @Schema(description = "Название проекта")
     private String name;
 
