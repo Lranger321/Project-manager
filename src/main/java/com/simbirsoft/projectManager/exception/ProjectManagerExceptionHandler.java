@@ -27,4 +27,12 @@ public class ProjectManagerExceptionHandler extends ResponseEntityExceptionHandl
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(
+            RuntimeException ex, WebRequest request, EntityNotFoundException e) {
+        String bodyOfResponse = e.toString();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.service;
+package com.simbirsoft.projectManager.utils;
 
 import com.simbirsoft.projectManager.dto.request.ProjectRequest;
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
