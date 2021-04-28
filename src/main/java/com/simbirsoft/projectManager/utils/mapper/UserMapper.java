@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
-import com.simbirsoft.projectManager.entity.UserEntity;
+import com.simbirsoft.projectManager.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(source = "fullName", target = "name")
     @Mapping(source = "email", target = "login")
-    UserResponse toDTO(UserEntity user);
+    UserResponse toDTO(User user);
 }
 
