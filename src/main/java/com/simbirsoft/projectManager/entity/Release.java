@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "release")
-public class ReleaseEntity {
+public class Release {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -22,16 +22,16 @@ public class ReleaseEntity {
     private LocalDateTime dateEnd;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ProjectEntity project;
+    private Project project;
 
     @OneToMany(mappedBy = "release", cascade = CascadeType.ALL)
-    private List<TaskEntity> taskEntities = new ArrayList<>();
+    private List<Task> taskEntities = new ArrayList<>();
 
-    public ReleaseEntity () {
+    public Release() {
 
     }
 
-    public ReleaseEntity(String version, LocalDateTime dateStart, LocalDateTime dateEnd, ProjectEntity project) {
+    public Release(String version, LocalDateTime dateStart, LocalDateTime dateEnd, Project project) {
         this.version = version;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
@@ -70,19 +70,19 @@ public class ReleaseEntity {
         this.dateEnd = dateEnd;
     }
 
-    public ProjectEntity getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(ProjectEntity project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 
-    public List<TaskEntity> getTaskEntities() {
+    public List<Task> getTaskEntities() {
         return taskEntities;
     }
 
-    public void setTaskEntities(List<TaskEntity> taskEntities) {
+    public void setTaskEntities(List<Task> taskEntities) {
         this.taskEntities = taskEntities;
     }
 }

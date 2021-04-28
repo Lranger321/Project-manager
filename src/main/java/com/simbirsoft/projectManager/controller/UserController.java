@@ -4,6 +4,7 @@ import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
 import com.simbirsoft.projectManager.service.impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,6 +45,12 @@ public class UserController {
     @DeleteMapping(value = "/{id}")
     public UserDeleteResponse deleteUser(@PathVariable("id") String id) {
         return userService.deleteUser(id);
+    }
+
+    @Operation(summary = "Получить пользователя по id")
+    @GetMapping("/{id}")
+    public UserResponse getUserById(@PathVariable String id) {
+        return userService.getUserById(id);
     }
 
 }

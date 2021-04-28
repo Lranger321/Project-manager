@@ -5,7 +5,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "task")
-public class TaskEntity {
+public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -21,20 +22,20 @@ public class TaskEntity {
     private String priority;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ProjectEntity project;
+    private Project project;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ReleaseEntity release;
+    private Release release;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private UserEntity user;
+    private User user;
 
-    public TaskEntity () {
+    public Task() {
 
     }
 
-    public TaskEntity(String name, String description, TaskStatus status, String priority,
-                      ProjectEntity project, ReleaseEntity release, UserEntity user) {
+    public Task(String name, String description, TaskStatus status, String priority,
+                Project project, Release release, User user) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -84,27 +85,27 @@ public class TaskEntity {
         this.priority = priority;
     }
 
-    public ProjectEntity getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(ProjectEntity project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 
-    public ReleaseEntity getRelease() {
+    public Release getRelease() {
         return release;
     }
 
-    public void setRelease(ReleaseEntity release) {
+    public void setRelease(Release release) {
         this.release = release;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

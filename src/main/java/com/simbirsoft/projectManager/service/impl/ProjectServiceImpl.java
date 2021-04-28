@@ -5,7 +5,7 @@ import com.simbirsoft.projectManager.dto.response.projects.ProjectAddResponse;
 import com.simbirsoft.projectManager.dto.response.projects.ProjectDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
 import com.simbirsoft.projectManager.dto.response.projects.ProjectUpdateResponse;
-import com.simbirsoft.projectManager.entity.ProjectEntity;
+import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
 import com.simbirsoft.projectManager.service.Converter;
@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponse getById(String id) {
         UUID uuid = UUID.fromString(id);
-        Optional<ProjectEntity> optionalProjectService = projectRepository.findById(uuid);
+        Optional<Project> optionalProjectService = projectRepository.findById(uuid);
         if (optionalProjectService.isEmpty()) {
             throw new ProjectNotFoundException();
         }
@@ -39,7 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectAddResponse addProject(ProjectRequest request) {
-        ProjectEntity project = converter.convertToProjectEntity(request);
+        Project project = converter.convertToProjectEntity(request);
         projectRepository.save(project);
         return new ProjectAddResponse(true);
     }
@@ -47,11 +47,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectUpdateResponse updateProject(String id, ProjectRequest request) {
         UUID uuid = UUID.fromString(id);
-        Optional<ProjectEntity> oldEntity =projectRepository.findById(uuid);
+        Optional<Project> oldEntity =projectRepository.findById(uuid);
         if (oldEntity.isEmpty()) {
             throw new ProjectNotFoundException();
         }
-        ProjectEntity newEntity = converter.convertToProjectEntity(oldEntity.get(),request);
+        Project newEntity = converter.convertToProjectEntity(oldEntity.get(),request);
         projectRepository.save(newEntity);
         return new ProjectUpdateResponse(true);
     }
