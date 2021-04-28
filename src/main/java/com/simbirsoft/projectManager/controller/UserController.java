@@ -1,7 +1,6 @@
 package com.simbirsoft.projectManager.controller;
 
 import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
@@ -47,9 +46,9 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @Operation(summary = "Получить пользователя по id")
-    @GetMapping("/{id}")
-    public UserResponse getUserById(@PathVariable String id) {
+    @Operation(summary = "")
+    @GetMapping(value = "/{id}")
+    public UserResponse getUserById (@PathVariable String id) {
         return userService.getUserById(id);
     }
 

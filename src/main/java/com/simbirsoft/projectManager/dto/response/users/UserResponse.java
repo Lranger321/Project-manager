@@ -8,17 +8,14 @@ public class UserResponse {
 
     private String login;
 
-    private String password;
-
     private LocalDateTime date;
 
     public UserResponse() {
     }
 
-    public UserResponse(String name, String login, String password, LocalDateTime date) {
+    public UserResponse(String name, String login,LocalDateTime date) {
         this.name = name;
         this.login = login;
-        this.password = password;
         this.date = date;
     }
 
@@ -36,14 +33,6 @@ public class UserResponse {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public LocalDateTime getDate() {
