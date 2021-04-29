@@ -12,7 +12,7 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface TaskMapper {
     @Mapping(target = "users", ignore = true)
-    @Mapping(target = "id", ignore = true)
+    //TODO @Mapping(target = "id", ignore = true)
     TaskResponse toDTO(Task task);
 
     Task toTaskEntity(TaskRequest request);
