@@ -1,53 +1,66 @@
 package com.simbirsoft.projectManager.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
+import org.apache.commons.lang3.StringUtils;
 
 @Schema(description = "Регистрация пользователя")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRegisterRequest {
 
-    @Schema(description = "Полное имя пользователя")
-    @JsonProperty("full_name")
-    private String fullName;
+  @Schema(description = "Полное имя пользователя")
+  @JsonProperty("full_name")
+  private String fullName;
 
-    @Schema(description = "Электронная почта пользователя")
-    private String email;
+  @Schema(description = "Электронная почта пользователя")
+  private String email;
 
-    @Schema(description = "Пароль пользователя")
-    private String password;
+  @Schema(description = "Пароль пользователя")
+  private String password;
 
-    public UserRegisterRequest() {
-    }
+  private LocalDateTime dateRegister;
 
-    public UserRegisterRequest(String fullName, String email, String password) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-    }
+  public UserRegisterRequest(String fullName, String email, String password){
+    this.fullName = fullName;
+    this.email = email;
+    this.password = password;
+    this.dateRegister=LocalDateTime.now();
+  }
 
-    public String getFullName() {
-        return fullName;
-    }
+  @JsonIgnore
+  public boolean isNotEmpty() {
+    return StringUtils.isNotEmpty(fullName) && StringUtils.isNotEmpty(email) && StringUtils
+        .isNotEmpty(password);
+  }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+  public String getFullName() {
+    return fullName;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public LocalDateTime getDateRegister() {
+    return dateRegister;
+  }
 }
