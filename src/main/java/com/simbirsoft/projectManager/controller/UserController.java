@@ -5,9 +5,11 @@ import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
+import com.simbirsoft.projectManager.exception.BadRequest;
 import com.simbirsoft.projectManager.service.impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ public class UserController {
 
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
+
     }
 
     @Operation(summary = "Авторизация пользователя")
@@ -28,10 +31,14 @@ public class UserController {
         return null;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Регистрация пользователя")
     @PostMapping("/register")
-    public UserRegisterResponse register(UserRegisterRequest request) {
-        return userService.registerUser(request);
+    public UserRegisterResponse register(@RequestBody UserRegisterRequest userRegisterRequest) {
+        if (!userRegisterRequest.isNotEmpty()) {
+            throw new BadRequest("some of required fields are empty");
+        }
+        return userService.registerUser(userRegisterRequest);
     }
 
     @Operation(summary = "Обновить информацию пользователя")
@@ -48,7 +55,7 @@ public class UserController {
 
     @Operation(summary = "")
     @GetMapping(value = "/{id}")
-    public UserResponse getUserById (@PathVariable String id) {
+    public UserResponse getUserById(@PathVariable String id) {
         return userService.getUserById(id);
     }
 

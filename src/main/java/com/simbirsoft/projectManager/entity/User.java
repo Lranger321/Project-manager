@@ -21,7 +21,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "date_register", nullable = false)
+    @Column(name = "date_register")
     private LocalDateTime dateRegister;
 
     @Column(name = "full_name", nullable = false)
