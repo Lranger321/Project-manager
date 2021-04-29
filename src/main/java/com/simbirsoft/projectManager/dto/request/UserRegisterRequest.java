@@ -23,15 +23,11 @@ public class UserRegisterRequest {
 
   private LocalDateTime dateRegister;
 
-    public UserRegisterRequest() {
-    }
-
-  public UserRegisterRequest(String fullName, String email, String password,LocalDateTime dateRegister) {
+  public UserRegisterRequest(String fullName, String email, String password){
     this.fullName = fullName;
     this.email = email;
     this.password = password;
     this.dateRegister=LocalDateTime.now();
-
   }
 
   @JsonIgnore
@@ -62,5 +58,9 @@ public class UserRegisterRequest {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public LocalDateTime getDateRegister() {
+    return dateRegister;
   }
 }
