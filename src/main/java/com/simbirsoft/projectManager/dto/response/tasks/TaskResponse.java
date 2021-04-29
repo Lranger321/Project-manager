@@ -1,5 +1,6 @@
 package com.simbirsoft.projectManager.dto.response.tasks;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 @Schema(description = "Задача")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskResponse {
 
     @Schema(description = "Название задачи")
@@ -76,4 +78,5 @@ public class TaskResponse {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
 }

@@ -15,6 +15,7 @@ import com.simbirsoft.projectManager.utils.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,7 +41,9 @@ public class UserServiceImpl implements UserService {
     UUID uuid = UUID.fromString(id);
     Optional<User> user = userRepository.findById(uuid);
       if (user.isPresent()) {
-          return userMapper.toDTO(user.get());
+        UserResponse userResponse = userMapper.toDTO(user.get());
+        userResponse.setId(user.get().getId().toString());
+        return userResponse;
       } else {
           throw new EntityNotFoundException("User", "id", id);
       }
@@ -50,8 +53,9 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserRegisterResponse registerUser(UserRegisterRequest request) {
     User user = userMapper.toUserEntity(request);
-    userRepository.save(user);
-    return new UserRegisterResponse(true);
+    user.setDateRegister(LocalDateTime.now());
+    String id = userRepository.save(user).getId().toString();
+    return new UserRegisterResponse(id,true);
   }
 
   @Override
@@ -71,7 +75,9 @@ public class UserServiceImpl implements UserService {
     if (oldUser.isEmpty()) {
       throw new UserNotFoundException();
     }
-    User user = converter.convertToUserEntity(oldUser.get(), request);
+    User user = userMapper.toUserEntity(request);
+    user.setId(oldUser.get().getId());
+    user.setDateRegister(oldUser.get().getDateRegister());
     userRepository.save(user);
     return new UserUpdateResponse(true);
   }

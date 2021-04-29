@@ -2,3 +2,4 @@ databaseChangeLog:
 
   - include: { relativeToChangelogFile: true, file: migrations/changelog-1.0.yaml }
   - include: { relativeToChangelogFile: true, file: migrations/changelog-2.0.yaml }
+  - include: { relativeToChangelogFile: true, file: migrations/changelog-3.0.yaml }

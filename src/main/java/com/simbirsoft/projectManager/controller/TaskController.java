@@ -21,7 +21,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @Operation(summary = "Получить проект по id")
+    @Operation(summary = "Получить задачу по id")
     @GetMapping(value = "/{id}")
     public TaskResponse getProjectById(@PathVariable("id") String id) {
         return taskService.getTaskById(id);
@@ -29,7 +29,7 @@ public class TaskController {
 
     @Operation(summary = "Добавить задачу")
     @PostMapping(value = "/")
-    public TaskAddResponse addTask(TaskRequest request) {
+    public TaskAddResponse addTask(@RequestBody TaskRequest request) {
         return taskService.addTask(request);
     }
 

@@ -21,15 +21,6 @@ public class UserRegisterRequest {
   @Schema(description = "Пароль пользователя")
   private String password;
 
-  private LocalDateTime dateRegister;
-
-  public UserRegisterRequest(String fullName, String email, String password){
-    this.fullName = fullName;
-    this.email = email;
-    this.password = password;
-    this.dateRegister=LocalDateTime.now();
-  }
-
   @JsonIgnore
   public boolean isNotEmpty() {
     return StringUtils.isNotEmpty(fullName) && StringUtils.isNotEmpty(email) && StringUtils
@@ -60,7 +51,4 @@ public class UserRegisterRequest {
     this.password = password;
   }
 
-  public LocalDateTime getDateRegister() {
-    return dateRegister;
-  }
 }

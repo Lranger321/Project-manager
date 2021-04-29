@@ -43,7 +43,7 @@ public class UserController {
 
     @Operation(summary = "Обновить информацию пользователя")
     @PutMapping("/update/{id}")
-    public UserUpdateResponse updateUser(@PathVariable String id, UserRegisterRequest request) {
+    public UserUpdateResponse updateUser(@PathVariable String id,@RequestBody UserRegisterRequest request) {
         return userService.updateUser(id, request);
     }
 
@@ -53,7 +53,7 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @Operation(summary = "")
+    @Operation(summary = "Получить пользователя по Id")
     @GetMapping(value = "/{id}")
     public UserResponse getUserById(@PathVariable String id) {
         return userService.getUserById(id);

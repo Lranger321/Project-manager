@@ -10,6 +10,12 @@ public class TaskRequest {
     @Schema(description = "Название задачи")
     private String name;
 
+    @Schema(description = "Id пользователя")
+    private String userId;
+
+    @Schema(description = "Id проекта")
+    private String projectId;
+
     @Schema(description = "Описание задачи")
     private String description;
 
@@ -19,22 +25,20 @@ public class TaskRequest {
     @Schema(description = "Время релиза задачи")
     private Date endDate;
 
-    TaskRequest() {
-    }
-
-    TaskRequest(String name, String description, Date startDate, Date endDate) {
-        this.name = name;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getDescription() {
@@ -61,4 +65,23 @@ public class TaskRequest {
         this.endDate = endDate;
     }
 
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskRequest{" +
+                "name='" + name + '\'' +
+                ", userId='" + userId + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

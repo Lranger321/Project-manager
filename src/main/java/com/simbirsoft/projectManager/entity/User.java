@@ -27,7 +27,7 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
     private List<Project> projects;

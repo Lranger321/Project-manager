@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class UserResponse {
 
+    private String id;
+
     private String name;
 
     private String login;
@@ -13,10 +15,12 @@ public class UserResponse {
     public UserResponse() {
     }
 
-    public UserResponse(String name, String login,LocalDateTime date) {
-        this.name = name;
-        this.login = login;
-        this.date = date;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

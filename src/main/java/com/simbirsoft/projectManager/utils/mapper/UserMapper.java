@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(source = "fullName", target = "name")
     @Mapping(source = "email", target = "login")
+    @Mapping(target = "id", ignore = true)
     UserResponse toDTO(User user);
 
     User toUserEntity(UserRegisterRequest request);

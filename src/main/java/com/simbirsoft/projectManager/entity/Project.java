@@ -26,7 +26,7 @@ public class Project {
     @Column(name = "date_end")
     private LocalDateTime dateEnd;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private List<Task> tasks;
 

@@ -6,6 +6,7 @@ import com.simbirsoft.projectManager.dto.response.projects.ProjectDeleteResponse
 import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
 import com.simbirsoft.projectManager.dto.response.projects.ProjectUpdateResponse;
 import com.simbirsoft.projectManager.entity.Project;
+import com.simbirsoft.projectManager.entity.User;
 import com.simbirsoft.projectManager.exception.EntityNotFoundException;
 import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
@@ -22,13 +23,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    private final Converter converter;
-
     private final ProjectMapper projectMapper;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, Converter converter, ProjectMapper projectMapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
-        this.converter = converter;
         this.projectMapper = projectMapper;
     }
 
@@ -43,9 +41,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectAddResponse addProject(ProjectRequest request) {
-        Project project = converter.convertToProjectEntity(request);
-        projectRepository.save(project);
-        return new ProjectAddResponse(true);
+        Project project = projectMapper.toProjectEntity(request);
+        String id = projectRepository.save(project).getId().toString();
+        return new ProjectAddResponse(id,true);
     }
 
     @Override
@@ -55,7 +53,8 @@ public class ProjectServiceImpl implements ProjectService {
         if (oldEntity.isEmpty()) {
             throw new ProjectNotFoundException();
         }
-        Project newEntity = converter.convertToProjectEntity(oldEntity.get(), request);
+        Project newEntity = projectMapper.toProjectEntity(request);
+        newEntity.setId(oldEntity.get().getId());
         projectRepository.save(newEntity);
         return new ProjectUpdateResponse(true);
     }
