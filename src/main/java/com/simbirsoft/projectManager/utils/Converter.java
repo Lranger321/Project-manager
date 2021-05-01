@@ -23,7 +23,6 @@ public class Converter {
     }
 
     public Project convertToProjectEntity(Project project, ProjectRequest request){
-
         return project;
     }
 

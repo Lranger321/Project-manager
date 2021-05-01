@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.LocalDateTime;
 import org.apache.commons.lang3.StringUtils;
 
 @Schema(description = "Регистрация пользователя")

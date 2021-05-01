@@ -21,13 +21,13 @@ public class Task {
 
     private String priority;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Release release;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private User user;
 
     public Task() {

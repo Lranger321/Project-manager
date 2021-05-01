@@ -3,21 +3,15 @@ package com.simbirsoft.projectManager.dto.response.projects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.HashMap;
-
-@Schema(description = "Ответ об удаление проекта")
+@Schema(description = "Ответ об удалении проекта")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProjectDeleteResponse {
 
     @Schema(description = "Результат выполнения")
-    boolean result;
+    private boolean result;
 
-    @Schema(description = "Ошибки")
-    HashMap<String,String> errors;
+    public ProjectDeleteResponse() {
 
-    public ProjectDeleteResponse(boolean result, HashMap<String, String> errors) {
-        this.result = result;
-        this.errors = errors;
     }
 
     public ProjectDeleteResponse(boolean result) {
@@ -30,13 +24,5 @@ public class ProjectDeleteResponse {
 
     public void setResult(boolean result) {
         this.result = result;
-    }
-
-    public HashMap<String, String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(HashMap<String, String> errors) {
-        this.errors = errors;
     }
 }

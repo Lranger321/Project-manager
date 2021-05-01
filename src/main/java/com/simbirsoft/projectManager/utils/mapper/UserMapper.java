@@ -8,11 +8,16 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface UserMapper {
+
+    @Mapping(source = "fullName", target = "fullName")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "password", target = "password")
+    User toUserEntity(UserRegisterRequest request);
+
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "fullName", target = "name")
     @Mapping(source = "email", target = "login")
-    @Mapping(target = "id", ignore = true)
-    UserResponse toDTO(User user);
-
-    User toUserEntity(UserRegisterRequest request);
+    @Mapping(source = "dateRegister", target = "date", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    UserResponse toDto(User user);
 }
 

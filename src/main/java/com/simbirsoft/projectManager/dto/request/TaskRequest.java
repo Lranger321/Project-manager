@@ -2,7 +2,7 @@ package com.simbirsoft.projectManager.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.Date;
+import java.util.UUID;
 
 @Schema(description = "Задача")
 public class TaskRequest {
@@ -10,20 +10,38 @@ public class TaskRequest {
     @Schema(description = "Название задачи")
     private String name;
 
-    @Schema(description = "Id пользователя")
-    private String userId;
-
-    @Schema(description = "Id проекта")
-    private String projectId;
-
     @Schema(description = "Описание задачи")
     private String description;
 
-    @Schema(description = "Время старта задачи")
-    private Date startDate;
+    @Schema(description = "Статус задачи")
+    private String status;
 
-    @Schema(description = "Время релиза задачи")
-    private Date endDate;
+    @Schema(description = "Приоритет задачи")
+    private String priority;
+
+    @Schema(description = "ID релиза")
+    private UUID releaseId;
+
+    @Schema(description = "ID проекта")
+    private UUID projectId;
+
+    @Schema(description = "ID пользователя")
+    private UUID userId;
+
+    public TaskRequest () {
+
+    }
+
+    public TaskRequest(String name, String description, String status, String priority,
+                       UUID releaseId, UUID projectId, UUID userId) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.releaseId = releaseId;
+        this.projectId = projectId;
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;
@@ -31,14 +49,6 @@ public class TaskRequest {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getDescription() {
@@ -49,31 +59,47 @@ public class TaskRequest {
         this.description = description;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
-    public String getProjectId() {
+    public UUID getReleaseId() {
+        return releaseId;
+    }
+
+    public void setReleaseId(UUID releaseId) {
+        this.releaseId = releaseId;
+    }
+
+    public UUID getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(UUID projectId) {
         this.projectId = projectId;
     }
 
-    @Override
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    /*@Override
     public String toString() {
         return "TaskRequest{" +
                 "name='" + name + '\'' +
@@ -83,5 +109,5 @@ public class TaskRequest {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';
-    }
+    }*/
 }

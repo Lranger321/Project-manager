@@ -2,18 +2,22 @@ package com.simbirsoft.projectManager.dto.response.projects;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.HashMap;
+import java.util.UUID;
 
-@Schema(description = "Ответ об добавление проекта")
+@Schema(description = "Ответ о добавлении проекта")
 public class ProjectAddResponse {
 
-    @Schema(description = "Id проекта")
-    private String id;
+    @Schema(description = "ID проекта")
+    private UUID id;
 
     @Schema(description = "Результат выполнения")
-    boolean result;
+    private boolean result;
 
-    public ProjectAddResponse(String id, boolean result) {
+    public ProjectAddResponse() {
+
+    }
+
+    public ProjectAddResponse(UUID id, boolean result) {
         this.id = id;
         this.result = result;
     }
@@ -22,11 +26,11 @@ public class ProjectAddResponse {
         this.result = result;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
