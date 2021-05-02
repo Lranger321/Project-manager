@@ -1,7 +1,10 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
 import com.simbirsoft.projectManager.dto.response.tasks.TaskResponse;
+import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.Release;
 import com.simbirsoft.projectManager.entity.Task;
@@ -31,6 +34,15 @@ public abstract class TaskMapper {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProjectMapper projectMapper;
+
+    @Autowired
+    ReleaseMapper releaseMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "request.status", target = "status")
@@ -64,4 +76,16 @@ public abstract class TaskMapper {
     @Mapping(source = "release", target = "release")
     @Mapping(source = "user", target = "user")
     public abstract TaskResponse toDto(Task task);
+
+    public ProjectResponse projectToDto(Project project) {
+        return projectMapper.toDto(project);
+    }
+
+    public ReleaseResponse releaseToDto(Release release) {
+        return releaseMapper.toDto(release);
+    }
+
+    public UserResponse userToDto(User user) {
+        return userMapper.toDto(user);
+    }
 }
