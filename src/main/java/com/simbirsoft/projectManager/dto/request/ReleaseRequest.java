@@ -2,7 +2,6 @@ package com.simbirsoft.projectManager.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Schema(description = "Релиз")
