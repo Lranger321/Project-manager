@@ -1,17 +1,18 @@
-package com.simbirsoft.projectManager.dto.response.projects;
+package com.simbirsoft.projectManager.dto.response.releases;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Ответ об изменении проекта")
-public class ProjectUpdateResponse {
+@Schema(description = "Ответ об обновлении релиза")
+public class ReleaseUpdateResponse {
 
     @Schema(description = "Результат выполнения")
     boolean result;
 
-    public ProjectUpdateResponse() {
+    public ReleaseUpdateResponse() {
+
     }
 
-    public ProjectUpdateResponse(boolean result) {
+    public ReleaseUpdateResponse(boolean result) {
         this.result = result;
     }
 

@@ -1,11 +1,10 @@
 package com.simbirsoft.projectManager.dto.response.tasks;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.List;
 
 @Schema(description = "Задача")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,26 +16,33 @@ public class TaskResponse {
     @Schema(description = "Описание задачи")
     private String description;
 
-    @Schema(description = "Назначенные сотрудники")
-    private List<UserResponse> users;
+    @Schema(description = "Статус задачи")
+    private String status;
 
-    @Schema(description = "Время старта задачи")
-    @JsonProperty("start_date")
-    private String startDate;
+    @Schema(description = "Приоритет задачи")
+    private String priority;
 
-    @Schema(description = "Время релиза задачи")
-    @JsonProperty("end_date")
-    private String endDate;
+    @Schema(description = "Релиз")
+    private ReleaseResponse release;
+
+    @Schema(description = "Проект")
+    private ProjectResponse project;
+
+    @Schema(description = "Ответственный пользователь")
+    private UserResponse user;
 
     public TaskResponse() {
+
     }
 
-    public TaskResponse(String name, String description, List<UserResponse> users, String startDate, String endDate) {
+    public TaskResponse(String name, String description, String status, String priority, ReleaseResponse release, ProjectResponse project, UserResponse user) {
         this.name = name;
         this.description = description;
-        this.users = users;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.status = status;
+        this.priority = priority;
+        this.release = release;
+        this.project = project;
+        this.user = user;
     }
 
     public String getName() {
@@ -55,28 +61,43 @@ public class TaskResponse {
         this.description = description;
     }
 
-    public List<UserResponse> getUsers() {
-        return users;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUsers(List<UserResponse> users) {
-        this.users = users;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public ReleaseResponse getRelease() {
+        return release;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setRelease(ReleaseResponse release) {
+        this.release = release;
     }
 
+    public ProjectResponse getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectResponse project) {
+        this.project = project;
+    }
+
+    public UserResponse getUser() {
+        return user;
+    }
+
+    public void setUser(UserResponse user) {
+        this.user = user;
+    }
 }

@@ -6,13 +6,10 @@ import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
 import com.simbirsoft.projectManager.entity.User;
-import com.simbirsoft.projectManager.exception.EntityNotFoundException;
 import com.simbirsoft.projectManager.exception.UserNotFoundException;
 import com.simbirsoft.projectManager.repository.UserRepository;
 import com.simbirsoft.projectManager.service.UserService;
-import com.simbirsoft.projectManager.utils.Converter;
 import com.simbirsoft.projectManager.utils.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,30 +20,21 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
-  private final Converter converter;
-  @Autowired
   private final UserMapper userMapper;
 
 
-  public UserServiceImpl(UserRepository userRepository, Converter converter,
-      UserMapper userMapper) {
+  public UserServiceImpl(UserRepository userRepository,
+                         UserMapper userMapper) {
     this.userRepository = userRepository;
-    this.converter = converter;
     this.userMapper = userMapper;
-
   }
 
   @Override
   public UserResponse getUserById(String id) {
     UUID uuid = UUID.fromString(id);
-    Optional<User> user = userRepository.findById(uuid);
-      if (user.isPresent()) {
-        UserResponse userResponse = userMapper.toDTO(user.get());
-        userResponse.setId(user.get().getId().toString());
-        return userResponse;
-      } else {
-          throw new EntityNotFoundException("User", "id", id);
-      }
+    Optional<User> userOptional = userRepository.findById(uuid);
+    return userOptional.map(userMapper::toDto)
+            .orElseThrow(() -> new UserNotFoundException("id", id));
   }
 
 
@@ -59,26 +47,25 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDeleteResponse deleteUser(String id) {
+  public UserUpdateResponse updateUser(String id, UserRegisterRequest request) {
     UUID uuid = UUID.fromString(id);
-    if (userRepository.findById(uuid).isEmpty()) {
-      throw new UserNotFoundException();
+    Optional<User> userOptional = userRepository.findById(uuid);
+    if (userOptional.isEmpty()) {
+      throw new UserNotFoundException("id", id);
     }
-    userRepository.deleteById(uuid);
-    return new UserDeleteResponse(true);
+    User user = userMapper.toUserEntity(request);
+    user.setId(uuid);
+    userRepository.save(user);
+    return new UserUpdateResponse(true);
   }
 
   @Override
-  public UserUpdateResponse updateUser(String id, UserRegisterRequest request) {
+  public UserDeleteResponse deleteUser(String id) {
     UUID uuid = UUID.fromString(id);
-    Optional<User> oldUser = userRepository.findById(uuid);
-    if (oldUser.isEmpty()) {
-      throw new UserNotFoundException();
+    if (userRepository.findById(uuid).isEmpty()) {
+      throw new UserNotFoundException("id", id);
     }
-    User user = userMapper.toUserEntity(request);
-    user.setId(oldUser.get().getId());
-    user.setDateRegister(oldUser.get().getDateRegister());
-    userRepository.save(user);
-    return new UserUpdateResponse(true);
+    userRepository.deleteById(uuid);
+    return new UserDeleteResponse(true);
   }
 }

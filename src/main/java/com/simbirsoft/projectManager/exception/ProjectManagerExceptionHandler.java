@@ -24,15 +24,29 @@ public class ProjectManagerExceptionHandler extends ResponseEntityExceptionHandl
             RuntimeException ex, WebRequest request, ProjectNotFoundException e) {
         String bodyOfResponse = e.toString();
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.CONFLICT, request);
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler(value = EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(
-            RuntimeException ex, WebRequest request, EntityNotFoundException e) {
+    @ExceptionHandler(value = UserNotFoundException.class)
+    protected ResponseEntity<Object> handleUserNotFound(
+            RuntimeException ex, WebRequest request, UserNotFoundException e) {
         String bodyOfResponse = e.toString();
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.CONFLICT, request);
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler(value = TaskNotFoundException.class)
+    protected ResponseEntity<Object> handleTaskNotFound(
+            RuntimeException ex, WebRequest request, TaskNotFoundException e) {
+        String bodyOfResponse = e.toString();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+    @ExceptionHandler(value = ReleaseNotFoundException.class)
+    protected ResponseEntity<Object> handleReleaseNotFound(
+            RuntimeException ex, WebRequest request, ReleaseNotFoundException e) {
+        String bodyOfResponse = e.toString();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
 }

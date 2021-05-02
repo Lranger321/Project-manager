@@ -1,25 +1,33 @@
 package com.simbirsoft.projectManager.dto.response.users;
 
-import java.time.LocalDateTime;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Schema(description = "Пользователь")
 public class UserResponse {
 
-    private String id;
+    @Schema(description = "ID пользователя")
+    private UUID id;
 
+    @Schema(description = "Имя пользователя")
     private String name;
 
+    @Schema(description = "Логин (e-mail) пользователя")
     private String login;
 
+    @Schema(description = "Дата регистрации")
     private LocalDateTime date;
 
     public UserResponse() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

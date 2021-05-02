@@ -21,7 +21,7 @@ public class Release {
     @Column(name="date_end")
     private LocalDateTime dateEnd;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private Project project;
 
     @OneToMany(mappedBy = "release", cascade = CascadeType.ALL)

@@ -8,6 +8,9 @@ public class TaskUpdateResponse {
     @Schema(description = "Результат выполнения")
     private Boolean result;
 
+    public TaskUpdateResponse() {
+    }
+
     public TaskUpdateResponse(Boolean result) {
         this.result = result;
     }

@@ -3,12 +3,14 @@ package com.simbirsoft.projectManager.dto.response.users;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Ответ о регистрации пользователя")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRegisterResponse {
 
-    @Schema(description = "Id пользователя")
+    @Schema(description = "ID пользователя")
     private String id;
 
+    @Schema(description = "Результат выполнения")
     private boolean result;
 
     public String getId() {
@@ -17,6 +19,9 @@ public class UserRegisterResponse {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public UserRegisterResponse() {
     }
 
     public UserRegisterResponse(boolean result) {

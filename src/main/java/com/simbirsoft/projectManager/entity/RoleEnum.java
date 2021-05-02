@@ -1,6 +1,6 @@
 package com.simbirsoft.projectManager.entity;
 
-public enum  RoleEnum {
-    admin,
-    user
+public enum RoleEnum {
+    ADMIN,
+    USER
 }

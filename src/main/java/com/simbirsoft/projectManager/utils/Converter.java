@@ -11,6 +11,7 @@ import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.entity.User;
 import org.springframework.stereotype.Service;
 
+@Deprecated
 @Service
 public class Converter {
 
@@ -23,7 +24,6 @@ public class Converter {
     }
 
     public Project convertToProjectEntity(Project project, ProjectRequest request){
-
         return project;
     }
 

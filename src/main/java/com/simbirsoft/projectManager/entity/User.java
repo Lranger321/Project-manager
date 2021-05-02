@@ -1,9 +1,8 @@
 package com.simbirsoft.projectManager.entity;
 
-import org.springframework.scheduling.config.Task;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public class User {
     @OneToMany
     @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     public UUID getId() {
         return id;
