@@ -1,17 +1,15 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserResponse;
+import com.simbirsoft.projectManager.dto.response.ProjectResponse;
+import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
+import com.simbirsoft.projectManager.dto.response.TaskResponse;
+import com.simbirsoft.projectManager.dto.response.UserResponse;
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.Release;
 import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.entity.User;
-import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
-import com.simbirsoft.projectManager.exception.ReleaseNotFoundException;
-import com.simbirsoft.projectManager.exception.UserNotFoundException;
+import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
 import com.simbirsoft.projectManager.repository.ReleaseRepository;
 import com.simbirsoft.projectManager.repository.UserRepository;
@@ -55,17 +53,17 @@ public abstract class TaskMapper {
 
     public Project projectFromId (UUID value) {
         return projectRepository.findById(value)
-                .orElseThrow(() -> new ProjectNotFoundException("id", value.toString()));
+                .orElseThrow(() -> new NotFoundException(Project.class, "id", value.toString()));
     }
 
     public Release releaseFromId (UUID value) {
         return releaseRepository.findById(value)
-                .orElseThrow(() -> new ReleaseNotFoundException("id", value.toString()));
+                .orElseThrow(() -> new NotFoundException(Release.class, "id", value.toString()));
     }
 
     public User userFromId (UUID value) {
         return userRepository.findById(value)
-                .orElseThrow(() -> new UserNotFoundException("id", value.toString()));
+                .orElseThrow(() -> new NotFoundException(User.class, "id", value.toString()));
     }
 
     @Mapping(source = "name", target = "name")

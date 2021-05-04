@@ -1,9 +1,6 @@
-package com.simbirsoft.projectManager.dto.response.tasks;
+package com.simbirsoft.projectManager.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.simbirsoft.projectManager.dto.response.projects.ProjectResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Задача")

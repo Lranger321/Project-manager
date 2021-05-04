@@ -14,39 +14,26 @@ public class ProjectManagerExceptionHandler extends ResponseEntityExceptionHandl
     @ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
     protected ResponseEntity<Object> handleConflict(
             RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "Something goes wrong :(";
+        String bodyOfResponse = "An error occurred while handling the request data: \n " +
+                ex.getMessage() + "\n" +
+                request.toString();
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-    @ExceptionHandler(value = ProjectNotFoundException.class)
-    protected ResponseEntity<Object> handleProjectNotFound(
-            RuntimeException ex, WebRequest request, ProjectNotFoundException e) {
+    @ExceptionHandler(value = NotFoundException.class)
+    protected ResponseEntity<Object> handleItemNotFound(
+            RuntimeException ex, WebRequest request, NotFoundException e) {
         String bodyOfResponse = e.toString();
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler(value = UserNotFoundException.class)
-    protected ResponseEntity<Object> handleUserNotFound(
-            RuntimeException ex, WebRequest request, UserNotFoundException e) {
-        String bodyOfResponse = e.toString();
+    @ExceptionHandler(value = BadRequestException.class)
+    protected ResponseEntity<Object> badRequest(
+            RuntimeException ex, WebRequest request, BadRequestException e) {
+        String bodyOfResponse = e.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
-
-    @ExceptionHandler(value = TaskNotFoundException.class)
-    protected ResponseEntity<Object> handleTaskNotFound(
-            RuntimeException ex, WebRequest request, TaskNotFoundException e) {
-        String bodyOfResponse = e.toString();
-        return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
-    @ExceptionHandler(value = ReleaseNotFoundException.class)
-    protected ResponseEntity<Object> handleReleaseNotFound(
-            RuntimeException ex, WebRequest request, ReleaseNotFoundException e) {
-        String bodyOfResponse = e.toString();
-        return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }

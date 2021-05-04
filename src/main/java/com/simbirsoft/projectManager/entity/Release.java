@@ -2,9 +2,7 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "release")
@@ -25,7 +23,7 @@ public class Release {
     private Project project;
 
     @OneToMany(mappedBy = "release", cascade = CascadeType.ALL)
-    private List<Task> taskEntities = new ArrayList<>();
+    private Set<Task> taskEntities = new HashSet<>();
 
     public Release() {
 
@@ -78,11 +76,11 @@ public class Release {
         this.project = project;
     }
 
-    public List<Task> getTaskEntities() {
+    public Set<Task> getTaskEntities() {
         return taskEntities;
     }
 
-    public void setTaskEntities(List<Task> taskEntities) {
+    public void setTaskEntities(Set<Task> taskEntities) {
         this.taskEntities = taskEntities;
     }
 }

@@ -2,9 +2,7 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -29,7 +27,10 @@ public class User {
     @OneToMany
     @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private List<Project> projects = new ArrayList<>();
+    private Set<Project> projects = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
+    private Set<Task> taskEntities = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -71,11 +72,19 @@ public class User {
         this.fullName = fullName;
     }
 
-    public List<Project> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    public Set<Task> getTaskEntities() {
+        return taskEntities;
+    }
+
+    public void setTaskEntities(Set<Task> taskEntities) {
+        this.taskEntities = taskEntities;
     }
 }

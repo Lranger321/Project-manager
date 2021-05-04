@@ -1,16 +1,14 @@
 package com.simbirsoft.projectManager.controller;
 
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskAddResponse;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskResponse;
-import com.simbirsoft.projectManager.dto.response.tasks.TaskUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.TaskResponse;
 import com.simbirsoft.projectManager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Tag(name = "Управление задачами")
 @RestController
@@ -24,27 +22,27 @@ public class TaskController {
     }
 
     @Operation(summary = "Получить задачу по id")
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TaskResponse> getProjectById(@PathVariable String id) {
-        return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
+        return ResponseEntity.ok(taskService.getTaskById(id));
     }
 
     @Operation(summary = "Добавить задачу")
-    @PostMapping(value = "/")
-    public ResponseEntity<TaskAddResponse> addTask(TaskRequest request) {
-        return new ResponseEntity<>(taskService.addTask(request), HttpStatus.OK);
+    @PostMapping("/")
+    public ResponseEntity<UUID> addTask(@RequestBody TaskRequest request) {
+        return ResponseEntity.ok(taskService.addTask(request));
     }
 
     @Operation(summary = "Обновить информацию о задаче")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<TaskUpdateResponse> updateProject(@PathVariable String id,
-                                                            TaskRequest request) {
-        return new ResponseEntity<>(taskService.updateTask(id, request), HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> updateProject(@PathVariable String id,
+                                                 @RequestBody TaskRequest request) {
+        return ResponseEntity.ok(taskService.updateTask(id, request));
     }
 
     @Operation(summary = "Удалить задачу")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<TaskDeleteResponse> deleteTask(@PathVariable String id) {
-        return new ResponseEntity<>(taskService.deleteTask(id), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String id) {
+        return ResponseEntity.ok(taskService.deleteTask(id));
     }
 }

@@ -1,19 +1,18 @@
 package com.simbirsoft.projectManager.service;
 
 import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.users.UserResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.UserResponse;
+
+import java.util.UUID;
 
 public interface UserService {
 
     UserResponse getUserById(String id);
 
-    UserRegisterResponse registerUser(UserRegisterRequest request);
+    UUID registerUser(UserRegisterRequest request);
 
-    UserDeleteResponse deleteUser(String id);
+    boolean deleteUser(String id);
 
-    UserUpdateResponse updateUser(String id, UserRegisterRequest request);
+    boolean updateUser(String id, UserRegisterRequest request);
 
 }

@@ -2,9 +2,7 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "project")
@@ -27,15 +25,15 @@ public class Project {
     private LocalDateTime dateEnd;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Release> releases = new ArrayList<>();
+    private Set<Release> releases = new HashSet<>();
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
+    private Set<Task> tasks = new HashSet<>();
 
     @OneToMany
     @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
 
     public Project() {
     }
@@ -87,27 +85,27 @@ public class Project {
         this.dateEnd = dateEnd;
     }
 
-    public List<Release> getReleases() {
+    public Set<Release> getReleases() {
         return releases;
     }
 
-    public void setReleases(List<Release> releases) {
+    public void setReleases(Set<Release> releases) {
         this.releases = releases;
     }
 
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 }

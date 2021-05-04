@@ -1,10 +1,10 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
 import com.simbirsoft.projectManager.dto.request.ReleaseRequest;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
+import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.Release;
-import com.simbirsoft.projectManager.exception.ProjectNotFoundException;
+import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -28,7 +28,7 @@ public abstract class ReleaseMapper {
 
     public Project projectFromId (UUID value) {
         return projectRepository.findById(value)
-                .orElseThrow(() -> new ProjectNotFoundException("id", value.toString()));
+                .orElseThrow(() -> new NotFoundException(Project.class, "id", value.toString()));
     }
 
     @Mapping(source = "version", target = "version")

@@ -1,16 +1,14 @@
 package com.simbirsoft.projectManager.service.impl;
 
 import com.simbirsoft.projectManager.dto.request.ReleaseRequest;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseAddResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
 import com.simbirsoft.projectManager.entity.Release;
-import com.simbirsoft.projectManager.exception.ReleaseNotFoundException;
+import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.ReleaseRepository;
 import com.simbirsoft.projectManager.service.ReleaseService;
 import com.simbirsoft.projectManager.utils.mapper.ReleaseMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +17,6 @@ import java.util.UUID;
 public class ReleaseServiceImpl implements ReleaseService {
 
     private final ReleaseRepository releaseRepository;
-
     private final ReleaseMapper releaseMapper;
 
     public ReleaseServiceImpl(ReleaseRepository releaseRepository,
@@ -28,43 +25,45 @@ public class ReleaseServiceImpl implements ReleaseService {
         this.releaseMapper = releaseMapper;
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public ReleaseResponse getById(String id) {
         UUID uuid = UUID.fromString(id);
         Optional<Release> releaseOptional = releaseRepository.findById(uuid);
         return releaseOptional.map(releaseMapper::toDto)
-                .orElseThrow(() -> new ReleaseNotFoundException("id", id));
+                .orElseThrow(() -> new NotFoundException(Release.class, "id", id));
     }
 
+    @Transactional
     @Override
-    public ReleaseAddResponse addRelease(ReleaseRequest request) {
+    public UUID addRelease(ReleaseRequest request) {
         Release release = releaseMapper.toReleaseEntity(request);
-        UUID id = releaseRepository.save(release).getId();
-        return new ReleaseAddResponse(id, true);
+        return releaseRepository.save(release).getId();
     }
 
+    @Transactional
     @Override
-    public ReleaseUpdateResponse updateRelease(String id, ReleaseRequest request) {
+    public boolean updateRelease(String id, ReleaseRequest request) {
         UUID uuid = UUID.fromString(id);
         Optional<Release> releaseOptional = releaseRepository.findById(uuid);
         if (releaseOptional.isEmpty()) {
-            throw new ReleaseNotFoundException("id", id);
+            throw new NotFoundException(Release.class, "id", id);
         }
         Release newEntity = releaseMapper.toReleaseEntity(request);
         newEntity.setId(uuid);
         releaseRepository.save(newEntity);
-        return new ReleaseUpdateResponse(true);
+        return true;
     }
 
+    @Transactional
     @Override
-    public ReleaseDeleteResponse deleteById(String id) {
+    public boolean deleteById(String id) {
         UUID uuid = UUID.fromString(id);
         Optional<Release> releaseOptional = releaseRepository.findById(uuid);
         if (releaseOptional.isEmpty()) {
-            throw new ReleaseNotFoundException("id", id);
+            throw new NotFoundException(Release.class, "id", id);
         }
         releaseRepository.deleteById(uuid);
-        return new ReleaseDeleteResponse(true);
+        return true;
     }
 }

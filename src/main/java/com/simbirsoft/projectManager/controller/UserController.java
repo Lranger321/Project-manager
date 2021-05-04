@@ -1,17 +1,15 @@
 package com.simbirsoft.projectManager.controller;
 
 import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.users.UserDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserRegisterResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserResponse;
-import com.simbirsoft.projectManager.dto.response.users.UserUpdateResponse;
-import com.simbirsoft.projectManager.exception.BadRequest;
+import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.exception.BadRequestException;
 import com.simbirsoft.projectManager.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Tag(name = "Управление пользователями")
 @RestController
@@ -28,35 +26,35 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Boolean> login() {
         // TODO: complete login through Spring Security
-        return new ResponseEntity<>(false, HttpStatus.OK);
+        return ResponseEntity.ok(false);
     }
 
     @Operation(summary = "Регистрация пользователя")
     @PostMapping("/register")
-    public ResponseEntity<UserRegisterResponse> register(UserRegisterRequest request) {
+    public ResponseEntity<UUID> register(@RequestBody UserRegisterRequest request) {
         if (!request.isNotEmpty()) {
-            throw new BadRequest("some of required fields are empty");
+            throw new BadRequestException("some of required fields are empty");
         }
-        return new ResponseEntity<>(userService.registerUser(request), HttpStatus.CREATED);
+        return ResponseEntity.ok(userService.registerUser(request));
     }
 
     @Operation(summary = "Обновить информацию о пользователе")
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserUpdateResponse> updateUser(@PathVariable String id,
-                                         UserRegisterRequest request) {
-        return new ResponseEntity<>(userService.updateUser(id, request), HttpStatus.OK);
+    public ResponseEntity<Boolean> updateUser(@PathVariable String id,
+                                              @RequestBody UserRegisterRequest request) {
+        return ResponseEntity.ok(userService.updateUser(id, request));
     }
 
     @Operation(summary = "Удалить пользователя")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<UserDeleteResponse> deleteUser(@PathVariable("id") String id) {
-        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteUser(@PathVariable("id") String id) {
+        return ResponseEntity.ok(userService.deleteUser(id));
     }
 
     @Operation(summary = "Получить пользователя по Id")
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable String id) {
-        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
 }
