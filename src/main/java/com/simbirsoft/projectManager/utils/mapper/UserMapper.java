@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
 import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.users.UserResponse;
+import com.simbirsoft.projectManager.dto.response.UserResponse;
 import com.simbirsoft.projectManager.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

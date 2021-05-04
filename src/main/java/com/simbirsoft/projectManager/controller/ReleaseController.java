@@ -1,16 +1,14 @@
 package com.simbirsoft.projectManager.controller;
 
 import com.simbirsoft.projectManager.dto.request.ReleaseRequest;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseAddResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseDeleteResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseResponse;
-import com.simbirsoft.projectManager.dto.response.releases.ReleaseUpdateResponse;
+import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
 import com.simbirsoft.projectManager.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Tag(name = "Управление релизами")
 @RestController
@@ -24,27 +22,27 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Получить релиз по id")
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ReleaseResponse> getReleaseById (@PathVariable String id) {
-        return new ResponseEntity<>(releaseService.getById(id), HttpStatus.OK);
+        return ResponseEntity.ok(releaseService.getById(id));
     }
 
     @Operation(summary = "Добавить релиз")
-    @PostMapping(value = "/")
-    public ResponseEntity<ReleaseAddResponse> addRelease (ReleaseRequest request) {
-        return new ResponseEntity<>(releaseService.addRelease(request), HttpStatus.OK);
+    @PostMapping("/")
+    public ResponseEntity<UUID> addRelease (@RequestBody ReleaseRequest request) {
+        return ResponseEntity.ok(releaseService.addRelease(request));
     }
 
     @Operation(summary = "Обновить данные о релизе")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<ReleaseUpdateResponse> updateRelease (@PathVariable String id,
-                                                                ReleaseRequest request) {
-        return new ResponseEntity<>(releaseService.updateRelease(id, request), HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> updateRelease (@PathVariable String id,
+                                                  @RequestBody ReleaseRequest request) {
+        return ResponseEntity.ok(releaseService.updateRelease(id, request));
     }
 
     @Operation(summary = "Удалить релиз")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<ReleaseDeleteResponse> deleteRelease (@PathVariable String id) {
-        return new ResponseEntity<>(releaseService.deleteById(id), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteRelease (@PathVariable String id) {
+        return ResponseEntity.ok(releaseService.deleteById(id));
     }
 }
