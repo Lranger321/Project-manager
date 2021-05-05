@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class ReleaseMapper {
 
     @Autowired

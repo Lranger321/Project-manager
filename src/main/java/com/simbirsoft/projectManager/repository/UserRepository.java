@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 //     * @param fullName - имя пользователя
 //     * @return опционально пользователь
 //     */
-//    @Query("select u from users u where u.full_name = :full_name")
-//    Optional<User> findByFullName(@Param("full_name") String fullName);
+    @Query("SELECT u FROM User u WHERE u.fullName = :fullName")
+    Optional<User> findByFullName(@Param("fullName") String fullName);
 
 }
