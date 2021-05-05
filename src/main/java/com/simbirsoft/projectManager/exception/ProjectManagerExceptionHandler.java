@@ -36,4 +36,14 @@ public class ProjectManagerExceptionHandler extends ResponseEntityExceptionHandl
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    protected ResponseEntity<Object> usernameNotFound(
+            RuntimeException ex, WebRequest request, UsernameNotFoundException e
+    ) {
+        String bodyOfResponse = e.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
 }
