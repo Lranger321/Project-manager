@@ -129,7 +129,7 @@ databaseChangeLog:
         - column:
             name: password
             type: VARCHAR(255)
-        tableName: user
+        tableName: users
 - changeSet:
     id: 1619125400149-6
     author: Shafranov Danila (VirtualPower1x)
@@ -143,7 +143,7 @@ databaseChangeLog:
         onDelete: NO ACTION
         onUpdate: NO ACTION
         referencedColumnNames: id
-        referencedTableName: user
+        referencedTableName: users
         validate: true
 - changeSet:
     id: 1619125400149-7
@@ -173,7 +173,7 @@ databaseChangeLog:
         onDelete: NO ACTION
         onUpdate: NO ACTION
         referencedColumnNames: id
-        referencedTableName: user
+        referencedTableName: users
         validate: true
 - changeSet:
     id: 1619125400149-9

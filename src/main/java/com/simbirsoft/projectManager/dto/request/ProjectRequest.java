@@ -1,11 +1,9 @@
-package com.simbirsoft.projectManager.dto;
+package com.simbirsoft.projectManager.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDateTime;
-
 @Schema(description = "Проект")
-public class ProjectResponse {
+public class ProjectRequest {
 
     @Schema(description = "Название проекта")
     private String name;
@@ -14,15 +12,15 @@ public class ProjectResponse {
     private String status;
 
     @Schema(description = "Время старта проекта")
-    private LocalDateTime startTime;
+    private String startTime;
 
     @Schema(description = "Время релиза проекта")
-    private LocalDateTime releaseTime;
+    private String releaseTime;
 
-    public ProjectResponse() {
+    public ProjectRequest() {
     }
 
-    public ProjectResponse(String name, String status, LocalDateTime startTime, LocalDateTime releaseTime) {
+    public ProjectRequest(String name, String status, String startTime, String releaseTime) {
         this.name = name;
         this.status = status;
         this.startTime = startTime;
@@ -45,19 +43,19 @@ public class ProjectResponse {
         this.status = status;
     }
 
-    public LocalDateTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getReleaseTime() {
+    public String getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(LocalDateTime releaseTime) {
+    public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
 }

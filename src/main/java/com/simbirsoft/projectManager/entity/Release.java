@@ -2,13 +2,11 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "release")
-public class ReleaseEntity {
+public class Release {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -21,17 +19,17 @@ public class ReleaseEntity {
     @Column(name="date_end")
     private LocalDateTime dateEnd;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ProjectEntity project;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private Project project;
 
     @OneToMany(mappedBy = "release", cascade = CascadeType.ALL)
-    private List<TaskEntity> taskEntities = new ArrayList<>();
+    private Set<Task> taskEntities = new HashSet<>();
 
-    public ReleaseEntity () {
+    public Release() {
 
     }
 
-    public ReleaseEntity(String version, LocalDateTime dateStart, LocalDateTime dateEnd, ProjectEntity project) {
+    public Release(String version, LocalDateTime dateStart, LocalDateTime dateEnd, Project project) {
         this.version = version;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
@@ -70,19 +68,19 @@ public class ReleaseEntity {
         this.dateEnd = dateEnd;
     }
 
-    public ProjectEntity getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(ProjectEntity project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 
-    public List<TaskEntity> getTaskEntities() {
+    public Set<Task> getTaskEntities() {
         return taskEntities;
     }
 
-    public void setTaskEntities(List<TaskEntity> taskEntities) {
+    public void setTaskEntities(Set<Task> taskEntities) {
         this.taskEntities = taskEntities;
     }
 }

@@ -2,43 +2,35 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-@Table(name="user")
-public class UserEntity {
+@Table(name = "users")
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    @Column(name="date_register")
+    @Column(name = "date_register")
     private LocalDateTime dateRegister;
 
-    @Column(name="full_name")
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @OneToMany(mappedBy = "projectToUserID.user", cascade = CascadeType.ALL)
-    private List<ProjectToUserEntity> projectToUserEntities = new ArrayList<>();
+    @OneToMany
+    @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Project> projects = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<TaskEntity> taskEntities = new ArrayList<>();
-
-    public UserEntity () {
-
-    }
-
-    public UserEntity(String email, String password, LocalDateTime dateRegister, String fullName) {
-        this.email = email;
-        this.password = password;
-        this.dateRegister = dateRegister;
-        this.fullName = fullName;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
+    private Set<Task> taskEntities = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -80,19 +72,19 @@ public class UserEntity {
         this.fullName = fullName;
     }
 
-    public List<ProjectToUserEntity> getProjectToUserEntities() {
-        return projectToUserEntities;
+    public Set<Project> getProjects() {
+        return projects;
     }
 
-    public void setProjectToUserEntities(List<ProjectToUserEntity> projectToUserEntities) {
-        this.projectToUserEntities = projectToUserEntities;
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 
-    public List<TaskEntity> getTaskEntities() {
+    public Set<Task> getTaskEntities() {
         return taskEntities;
     }
 
-    public void setTaskEntities(List<TaskEntity> taskEntities) {
+    public void setTaskEntities(Set<Task> taskEntities) {
         this.taskEntities = taskEntities;
     }
 }

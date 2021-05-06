@@ -1,30 +1,48 @@
 package com.simbirsoft.projectManager.controller;
 
-import com.simbirsoft.projectManager.dto.ProjectRequest;
-import com.simbirsoft.projectManager.dto.ProjectResponse;
+import com.simbirsoft.projectManager.dto.request.TaskRequest;
+import com.simbirsoft.projectManager.dto.response.TaskResponse;
+import com.simbirsoft.projectManager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Tag(name = "Управление задачами")
 @RestController
-@RequestMapping("api/tasks")
+@RequestMapping("/api/tasks")
 public class TaskController {
 
-    @Operation(summary = "Добавить задачу")
-    @PostMapping(value = "/")
-    public ResponseEntity addProject() {
+    private final TaskService taskService;
 
-        return null;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @Operation(summary = "Получить задачу по id")
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponse> getProjectById(@PathVariable String id) {
+        return ResponseEntity.ok(taskService.getTaskById(id));
+    }
+
+    @Operation(summary = "Добавить задачу")
+    @PostMapping("/")
+    public ResponseEntity<UUID> addTask(@RequestBody TaskRequest request) {
+        return ResponseEntity.ok(taskService.addTask(request));
     }
 
     @Operation(summary = "Обновить информацию о задаче")
-    @PutMapping(value = "/")
-    public ResponseEntity setProject() {
-
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> updateProject(@PathVariable String id,
+                                                 @RequestBody TaskRequest request) {
+        return ResponseEntity.ok(taskService.updateTask(id, request));
     }
 
-
+    @Operation(summary = "Удалить задачу")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String id) {
+        return ResponseEntity.ok(taskService.deleteTask(id));
+    }
 }

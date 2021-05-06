@@ -1,0 +1,153 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1619902444090-1
+      author: Danila Shafranov (VirtualPower1x)
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 7f88f208-ab73-4bce-9550-63496fe322dc
+              - column:
+                  name: date_end
+                  valueDate: 2022-05-02T12:00:00
+              - column:
+                  name: date_start
+                  valueDate: 2021-05-02T12:00:00
+              - column:
+                  name: version
+                  value: 1.0.1
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cef
+            tableName: release
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1696e4c8-aa69-402c-9892-09e516a82f70
+              - column:
+                  name: date_end
+                  valueDate: 2022-05-02T00:42:00
+              - column:
+                  name: date_start
+                  valueDate: 2021-05-02T00:42:00
+              - column:
+                  name: version
+                  value: '1.0'
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cea
+            tableName: release
+  - changeSet:
+      id: 1619902444090-2
+      author: Danila Shafranov (VirtualPower1x)
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 6ad3c079-6b7c-4fe2-bb5a-d5c7571a965f
+              - column:
+                  name: description
+                  value: Complete authorizing
+              - column:
+                  name: name
+                  value: Complete Login
+              - column:
+                  name: priority
+                  value: Neccessary task
+              - column:
+                  name: status
+                  value: BACKLOG
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cef
+              - column:
+                  name: release_id
+                  value: 7f88f208-ab73-4bce-9550-63496fe322dc
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655ceb
+            tableName: task
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 819cc45a-f1dd-43c2-b8e6-330f4bc34f70
+              - column:
+                  name: description
+                  value: Create the user interface
+              - column:
+                  name: name
+                  value: Complete UI
+              - column:
+                  name: priority
+                  value: Neccessary task
+              - column:
+                  name: status
+                  value: BACKLOG
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cef
+              - column:
+                  name: release_id
+                  value: 7f88f208-ab73-4bce-9550-63496fe322dc
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+            tableName: task
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 025e4448-9492-430c-8559-5f4b9182c4cd
+              - column:
+                  name: description
+                  value: Test CRUD requests
+              - column:
+                  name: name
+                  value: CRUD Test
+              - column:
+                  name: priority
+                  value: Main task
+              - column:
+                  name: status
+                  value: IN_PROGRESS
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cea
+              - column:
+                  name: release_id
+                  value: 1696e4c8-aa69-402c-9892-09e516a82f70
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+            tableName: task
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: e34ec18e-4718-425b-9b92-a2c6fcacf8ae
+              - column:
+                  name: description
+                  value: Complete all exceptions handling
+              - column:
+                  name: name
+                  value: Complete Exceptions
+              - column:
+                  name: priority
+                  value: Neccessary task
+              - column:
+                  name: status
+                  value: BACKLOG
+              - column:
+                  name: project_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cea
+              - column:
+                  name: release_id
+                  value: 1696e4c8-aa69-402c-9892-09e516a82f70
+              - column:
+                  name: user_id
+                  value: 749c62bc-f960-4511-961f-ffa98c655cec
+            tableName: task

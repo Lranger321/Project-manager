@@ -2,13 +2,11 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "project")
-public class ProjectEntity {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +24,21 @@ public class ProjectEntity {
     @Column(name = "date_end")
     private LocalDateTime dateEnd;
 
-    @OneToMany(mappedBy = "projectToUserID.project", cascade = CascadeType.ALL)
-    private List<ProjectToUserEntity> projectToUserEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Release> releases = new HashSet<>();
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<ReleaseEntity> releaseEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Task> tasks = new HashSet<>();
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<TaskEntity> taskEntities = new ArrayList<>();
+    @OneToMany
+    @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> users = new HashSet<>();
 
-    public ProjectEntity() {
+    public Project() {
     }
 
-    public ProjectEntity(String name, ProjectStatus status, LocalDateTime dateStart, LocalDateTime dateEnd) {
+    public Project(String name, ProjectStatus status, LocalDateTime dateStart, LocalDateTime dateEnd) {
         this.name = name;
         this.status = status;
         this.dateStart = dateStart;
@@ -85,27 +85,27 @@ public class ProjectEntity {
         this.dateEnd = dateEnd;
     }
 
-    public List<ProjectToUserEntity> getProjectToUserEntities() {
-        return projectToUserEntities;
+    public Set<Release> getReleases() {
+        return releases;
     }
 
-    public void setProjectToUserEntities(List<ProjectToUserEntity> projectToUserEntities) {
-        this.projectToUserEntities = projectToUserEntities;
+    public void setReleases(Set<Release> releases) {
+        this.releases = releases;
     }
 
-    public List<ReleaseEntity> getReleaseEntities() {
-        return releaseEntities;
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setReleaseEntities(List<ReleaseEntity> releaseEntities) {
-        this.releaseEntities = releaseEntities;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public List<TaskEntity> getTaskEntities() {
-        return taskEntities;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setTaskEntities(List<TaskEntity> taskEntities) {
-        this.taskEntities = taskEntities;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

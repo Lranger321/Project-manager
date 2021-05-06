@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: Drop foreign keys
+      author: Kozlov Nikita (Lranger321)
+      changes:
+        - sql: ALTER TABLE task DROP CONSTRAINT fk2hsytmxysatfvt0p1992cw449
+        - sql: ALTER TABLE task DROP CONSTRAINT fkdgofiix8cubb3ajfqxej7erp7
+        - sql: ALTER TABLE task DROP CONSTRAINT fkk8qrwowg31kx7hp93sru1pdqa
+        - sql: ALTER TABLE release DROP CONSTRAINT fkhmai3uwogjte55w6h0t6b6inh
+        - sql: ALTER TABLE project_to_user DROP CONSTRAINT fk3chhctko8nk7cxmp9ru9ktknr
+        - sql: ALTER TABLE project_to_user DROP CONSTRAINT fk46fg4ohn72lh6j8eeyrxwy90j
