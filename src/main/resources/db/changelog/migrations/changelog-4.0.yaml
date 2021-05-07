@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: Change roles
+      author: Kozlov Nikita (Lranger321)
+      changes:
+        - sql: ALTER TABLE project_to_user DROP COLUMN role
+        - sql: ALTER TABLE users ADD COLUMN role varchar(60)
+        - sql: ALTER TABLE users ALTER COLUMN role SET DEFAULT 'USER'

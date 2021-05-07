@@ -32,6 +32,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private Set<Task> taskEntities = new HashSet<>();
 
+    @Column(name = "role")
+    private RoleEnum role;
+
     public UUID getId() {
         return id;
     }
