@@ -1,5 +1,6 @@
 package com.simbirsoft.projectManager.controller;
 
+import com.simbirsoft.projectManager.dto.request.ChangeTaskStatusRequest;
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
 import com.simbirsoft.projectManager.dto.response.TaskResponse;
 import com.simbirsoft.projectManager.service.TaskService;
@@ -45,4 +46,11 @@ public class TaskController {
     public ResponseEntity<Boolean> deleteTask(@PathVariable String id) {
         return ResponseEntity.ok(taskService.deleteTask(id));
     }
+
+    @Operation(summary = "Изменить статус задачи")
+    @PostMapping("/changeStatus")
+    public ResponseEntity<Boolean> changeStatus(@RequestBody ChangeTaskStatusRequest request){
+        return ResponseEntity.ok(taskService.changeStatus(request));
+    }
+
 }

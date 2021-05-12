@@ -1,5 +1,6 @@
 package com.simbirsoft.projectManager.controller;
 
+import com.simbirsoft.projectManager.dto.request.ChangeProjectStatusRequest;
 import com.simbirsoft.projectManager.dto.request.ProjectRequest;
 import com.simbirsoft.projectManager.dto.response.ProjectResponse;
 import com.simbirsoft.projectManager.service.ProjectService;
@@ -44,6 +45,12 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteProject(@PathVariable("id") String id) {
         return ResponseEntity.ok(projectService.deleteById(id));
+    }
+
+    @Operation(summary = "Изменить статус проекта")
+    @PostMapping("/")
+    public ResponseEntity<Boolean> changeStatus(@RequestBody ChangeProjectStatusRequest request) {
+        return ResponseEntity.ok(projectService.changeStatus(request));
     }
 
 }

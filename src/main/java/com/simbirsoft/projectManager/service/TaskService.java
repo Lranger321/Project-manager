@@ -1,5 +1,6 @@
 package com.simbirsoft.projectManager.service;
 
+import com.simbirsoft.projectManager.dto.request.ChangeTaskStatusRequest;
 import com.simbirsoft.projectManager.dto.request.TaskRequest;
 import com.simbirsoft.projectManager.dto.response.TaskResponse;
 
@@ -14,5 +15,7 @@ public interface TaskService {
     boolean updateTask(String id, TaskRequest request);
 
     boolean deleteTask(String id);
+
+    boolean changeStatus(ChangeTaskStatusRequest request);
 
 }
