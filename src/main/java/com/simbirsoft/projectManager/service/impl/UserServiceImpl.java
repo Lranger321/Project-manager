@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.service.impl;
 
-import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
+import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
 import com.simbirsoft.projectManager.entity.User;
 import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.UserRepository;

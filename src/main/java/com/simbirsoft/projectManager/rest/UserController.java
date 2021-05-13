@@ -1,7 +1,7 @@
-package com.simbirsoft.projectManager.controller;
+package com.simbirsoft.projectManager.rest;
 
-import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
+import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
 import com.simbirsoft.projectManager.exception.BadRequestException;
 import com.simbirsoft.projectManager.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
