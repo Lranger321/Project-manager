@@ -84,6 +84,7 @@ public class ProjectServiceImpl implements ProjectService {
             }
         }
         project.setStatus(request.getStatus());
+        projectRepository.save(project);
         return true;
     }
 }

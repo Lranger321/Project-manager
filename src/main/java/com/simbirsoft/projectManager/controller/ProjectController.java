@@ -48,7 +48,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Изменить статус проекта")
-    @PostMapping("/")
+    @PostMapping("/changeStatus")
     public ResponseEntity<Boolean> changeStatus(@RequestBody ChangeProjectStatusRequest request) {
         return ResponseEntity.ok(projectService.changeStatus(request));
     }
