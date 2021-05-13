@@ -1,10 +1,10 @@
 package com.simbirsoft.projectManager.utils.mapper;
 
-import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
-import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
-import com.simbirsoft.projectManager.dto.response.TaskResponse;
-import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.rest.dto.request.TaskRequest;
+import com.simbirsoft.projectManager.rest.dto.response.ProjectResponse;
+import com.simbirsoft.projectManager.rest.dto.response.ReleaseResponse;
+import com.simbirsoft.projectManager.rest.dto.response.TaskResponse;
+import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.Release;
 import com.simbirsoft.projectManager.entity.Task;

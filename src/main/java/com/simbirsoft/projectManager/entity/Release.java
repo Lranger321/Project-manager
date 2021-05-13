@@ -2,7 +2,9 @@ package com.simbirsoft.projectManager.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "release")
@@ -13,10 +15,10 @@ public class Release {
 
     private String version;
 
-    @Column(name="date_start")
+    @Column(name = "date_start")
     private LocalDateTime dateStart;
 
-    @Column(name="date_end")
+    @Column(name = "date_end")
     private LocalDateTime dateEnd;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

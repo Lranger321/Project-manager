@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.service;
 
-import com.simbirsoft.projectManager.dto.request.ReleaseRequest;
-import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ReleaseRequest;
+import com.simbirsoft.projectManager.rest.dto.response.ReleaseResponse;
 
 import java.util.UUID;
 

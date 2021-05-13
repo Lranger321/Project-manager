@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.service;
 
-import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
+import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
 
 import java.util.UUID;
 

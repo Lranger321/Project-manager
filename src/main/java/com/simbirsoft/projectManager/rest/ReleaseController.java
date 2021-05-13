@@ -1,7 +1,7 @@
-package com.simbirsoft.projectManager.controller;
+package com.simbirsoft.projectManager.rest;
 
-import com.simbirsoft.projectManager.dto.request.ReleaseRequest;
-import com.simbirsoft.projectManager.dto.response.ReleaseResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ReleaseRequest;
+import com.simbirsoft.projectManager.rest.dto.response.ReleaseResponse;
 import com.simbirsoft.projectManager.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

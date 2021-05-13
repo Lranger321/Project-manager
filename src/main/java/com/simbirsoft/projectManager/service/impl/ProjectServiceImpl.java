@@ -1,7 +1,7 @@
 package com.simbirsoft.projectManager.service.impl;
 
-import com.simbirsoft.projectManager.dto.request.ProjectRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ProjectRequest;
+import com.simbirsoft.projectManager.rest.dto.response.ProjectResponse;
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
