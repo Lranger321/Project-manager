@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.dto.request;
+package com.simbirsoft.projectManager.rest.dto.request;
 
 import com.simbirsoft.projectManager.entity.ProjectStatus;
 import com.simbirsoft.projectManager.entity.TaskStatus;

@@ -1,11 +1,11 @@
 package com.simbirsoft.projectManager.service.impl;
 
-import com.simbirsoft.projectManager.dto.request.ChangeTaskStatusRequest;
-import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.TaskResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ChangeTaskStatusRequest;
 import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.TaskRepository;
+import com.simbirsoft.projectManager.rest.dto.request.TaskRequest;
+import com.simbirsoft.projectManager.rest.dto.response.TaskResponse;
 import com.simbirsoft.projectManager.service.TaskService;
 import com.simbirsoft.projectManager.utils.mapper.TaskMapper;
 import org.springframework.stereotype.Service;

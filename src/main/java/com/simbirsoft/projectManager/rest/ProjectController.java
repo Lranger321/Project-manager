@@ -1,8 +1,8 @@
-package com.simbirsoft.projectManager.controller;
+package com.simbirsoft.projectManager.rest;
 
-import com.simbirsoft.projectManager.dto.request.ChangeProjectStatusRequest;
-import com.simbirsoft.projectManager.dto.request.ProjectRequest;
-import com.simbirsoft.projectManager.dto.response.ProjectResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ChangeProjectStatusRequest;
+import com.simbirsoft.projectManager.rest.dto.request.ProjectRequest;
+import com.simbirsoft.projectManager.rest.dto.response.ProjectResponse;
 import com.simbirsoft.projectManager.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
