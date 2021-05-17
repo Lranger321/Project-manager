@@ -34,7 +34,8 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@Valid @ModelAttribute("user") UserRegisterRequest userRegisterRequest, BindingResult bindingResult) {
+    public String registerNewUser(@Valid @ModelAttribute("user") UserRegisterRequest userRegisterRequest,
+                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }

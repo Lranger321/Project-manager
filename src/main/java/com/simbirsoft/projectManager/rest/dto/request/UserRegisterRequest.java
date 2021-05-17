@@ -21,6 +21,7 @@ public class UserRegisterRequest {
 
     @Schema(description = "Пароль пользователя")
     private String password;
+
     @NotBlank
     private String repeatPassword;
 
