@@ -26,11 +26,9 @@ public class UserAuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         Optional<User> user = repository.findByFullName(username);
         if (user.isPresent()) {
-            return new org.springframework.security.core.userdetails.User(user.get().getFullName(), user.get().getPassword(),
-                    Collections.singletonList(new SimpleGrantedAuthority("USER")));
+            return new org.springframework.security.core.userdetails.User(user.get().getFullName(),
+                    user.get().getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER")));
         }
         throw new NotFoundException(User.class, "fullName", username);
-        /*return new org.springframework.security.core.userdetails.User("babur", "asasa",
-                Collections.singletonList(new SimpleGrantedAuthority("USER")));*/
     }
 }

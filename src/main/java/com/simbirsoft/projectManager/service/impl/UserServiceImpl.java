@@ -9,6 +9,7 @@ import com.simbirsoft.projectManager.service.UserService;
 import com.simbirsoft.projectManager.utils.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -19,11 +20,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                         UserMapper userMapper) {
+                         UserMapper userMapper, PasswordEncoder passwordEncoder) {
       this.userRepository = userRepository;
       this.userMapper = userMapper;
+      this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(readOnly = true)
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService {
     public UUID registerUser(UserRegisterRequest request) {
       User user = userMapper.toUserEntity(request);
       user.setDateRegister(LocalDateTime.now());
+      user.setPassword(passwordEncoder.encode(request.getPassword()));
       return userRepository.save(user).getId();
     }
 
