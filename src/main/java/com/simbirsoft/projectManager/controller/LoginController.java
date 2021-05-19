@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+/**
+ *  Контроллер для страницы логина и регистрации
+ */
 @Controller
 public class LoginController {
 
