@@ -35,11 +35,11 @@
 </nav>
 
 <div class="container">
-    <form method="post" th:action="@{/}" th:object="${item}">
+    <form method="post" th:action="@{/}" th:object="${project}">
         <div class="input-group mb-3 mt-3">
-            <input type="text" th:field="*{name}" class="form-control" placeholder="Строка поиска?" aria-label="Строка поиска" aria-describedby="basic-addon2">
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Создать проект" aria-label="Создать проект" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="submit">Поиск</button>
+                <button class="btn btn-outline-primary" type="submit">Создать</button>
             </div>
         </div>
     </form>
@@ -53,12 +53,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${items}">
-            <th scope="row" th:text="${item.id}">1</th>
-            <td th:text="${item.name}">Проект №4</td>
+        <tr th:each="project : ${projects}">
+            <th scope="row" th:text="${project.id}">1</th>
+            <td th:text="${project.name}">Плашка</td>
             <td>
-                <form th:action="@{/{id}(id = ${item.id})}" th:method="delete">
+                <form th:action="@{/{id}(id = ${project.id})}" th:method="delete">
                     <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+                <form th:action="@{/{id}(id = ${project.name})}" th:method="get">
+                    <button type="submit" class="btn btn-outline-primary">Редактировать</button>
                 </form>
             </td>
         </tr>
