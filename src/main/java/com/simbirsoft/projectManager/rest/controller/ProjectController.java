@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.rest;
+package com.simbirsoft.projectManager.rest.controller;
 
 import com.simbirsoft.projectManager.rest.dto.request.ChangeProjectStatusRequest;
 import com.simbirsoft.projectManager.rest.dto.request.ProjectRequest;

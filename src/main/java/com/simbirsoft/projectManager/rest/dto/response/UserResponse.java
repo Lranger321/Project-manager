@@ -8,50 +8,57 @@ import java.util.UUID;
 @Schema(description = "Пользователь")
 public class UserResponse {
 
-    @Schema(description = "ID пользователя")
-    private UUID id;
+  @Schema(description = "ID пользователя")
+  private UUID id;
 
-    @Schema(description = "Имя пользователя")
-    private String name;
+  @Schema(description = "Имя пользователя")
+  private String name;
 
-    @Schema(description = "Логин (e-mail) пользователя")
-    private String login;
+  @Schema(description = "Логин (e-mail) пользователя")
+  private String login;
 
-    @Schema(description = "Дата регистрации")
-    private LocalDateTime date;
+  @Schema(description = "Дата регистрации")
+  private LocalDateTime date;
 
-    public UserResponse() {
-    }
 
-    public UUID getId() {
-        return id;
-    }
+  private String password;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+  public UserResponse() {
+  }
 
-    public String getName() {
-        return name;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public String getLogin() {
-        return login;
-    }
+  public void setId(UUID id) {
+    this.id = id;
+  }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
+  public String getLogin() {
+    return login;
+  }
+
+  public void setLogin(String login) {
+    this.login = login;
+  }
+
+  public LocalDateTime getDate() {
+    return date;
+  }
+
+  public void setDate(LocalDateTime date) {
+    this.date = date;
+  }
 }
