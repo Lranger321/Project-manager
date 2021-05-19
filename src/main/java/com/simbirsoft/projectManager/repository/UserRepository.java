@@ -29,4 +29,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("SELECT u FROM User u WHERE u.fullName = :fullName")
     Optional<User> findByFullName(@Param("fullName") String fullName);
 
+    Optional<User> findByEmail(String eMail);
 }

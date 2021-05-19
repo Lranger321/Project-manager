@@ -38,6 +38,14 @@ public class UserServiceImpl implements UserService {
               .orElseThrow(() -> new NotFoundException(User.class, "id", id));
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public UserResponse findByEmail(String email) {
+      Optional<User> userOptional = userRepository.findByEmail(email);
+      return userOptional.map(userMapper::toDto)
+              .orElseThrow(() -> new NotFoundException(User.class, "id", email));
+    }
+
     @Transactional
     @Override
     public UUID registerUser(UserRegisterRequest request) {

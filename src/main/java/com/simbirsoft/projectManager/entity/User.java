@@ -26,6 +26,19 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+//    @Enumerated(value = EnumType.STRING)
+//    @Column(name = "roles")
+//    private String role;
+//
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+    //     if we will keep the role in user table
+
     @OneToMany
     @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")})

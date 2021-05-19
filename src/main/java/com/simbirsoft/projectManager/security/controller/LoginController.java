@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.controller;
+package com.simbirsoft.projectManager.security.controller;
 
 import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
 import com.simbirsoft.projectManager.service.UserService;
