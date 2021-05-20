@@ -14,7 +14,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Управление проектами</a>
+    <a class="navbar-brand" href="#">Управление проектом  <span th:text="${project.name}"></span></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,9 +35,9 @@
 </nav>
 
 <div class="container">
-    <form method="post" th:action="@{/}" th:object="${project}">
+    <form method="post" th:action="@{/createTask/{id}(id = ${project.id})}" th:object="${task}">
         <div class="input-group mb-3 mt-3">
-            <input type="text" th:field="*{name}" class="form-control" placeholder="Создать проект" aria-label="Создать проект" aria-describedby="basic-addon2">
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Создать задачу" aria-label="Создать задачу" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-outline-primary" type="submit">Создать</button>
             </div>
@@ -53,14 +53,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="project : ${projects}">
-            <th scope="row" th:text="${project.id}">1</th>
-            <td th:text="${project.name}">Плашка</td>
+        <tr th:each="task : ${tasks}">
+            <th scope="row" th:text="${task.id}">1</th>
+            <td th:text="${task.name}">Плашка</td>
             <td>
-                <form th:action="@{/{id}(id = ${project.id})}" th:method="delete">
+                <form th:action="@{project/{id}(id = ${task.id})}" th:method="delete">
                     <button type="submit" class="btn btn-outline-danger">Удалить</button>
                 </form>
-                <form th:action="@{/project/{id}(id = ${project.id})}" th:method="get">
+                <form th:action="@{/{id}(id = ${task.name})}" th:method="get">
                     <button type="submit" class="btn btn-outline-primary">Редактировать</button>
                 </form>
             </td>

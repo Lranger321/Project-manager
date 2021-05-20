@@ -13,6 +13,7 @@ import com.simbirsoft.projectManager.utils.mapper.ProjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +37,11 @@ public class ProjectServiceImpl implements ProjectService {
         Optional<Project> projectOptional = projectRepository.findById(uuid);
         return projectOptional.map(projectMapper::toDto)
                 .orElseThrow(() -> new NotFoundException(Project.class, "id", id));
+    }
+
+    @Override
+    public List<ProjectResponse> getByUsername(String username) {
+        return null;
     }
 
     @Transactional
