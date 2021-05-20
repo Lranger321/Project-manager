@@ -1,4 +1,4 @@
-package com.simbirsoft.projectManager.security.service;
+package com.simbirsoft.projectManager.service.impl;
 
 import com.simbirsoft.projectManager.entity.User;
 import com.simbirsoft.projectManager.exception.NotFoundException;
