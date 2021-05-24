@@ -12,13 +12,14 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-//    /**
-//     * Находит пользователя по id
-//     *
-//     * @param uuid - id пользователя
-//     * @return опционально пользователь
-//     */
-//    Optional<User> findById(UUID uuid);
+    /**
+     * Находит пользователя по id
+     *
+     * @param uuid - id пользователя
+     * @return опционально пользователь
+     */
+    @Query("SELECT u FROM User u WHERE u.id = :uuid")
+    Optional<User> findById(@Param("uuid") UUID uuid);
 
     /**
      * Находит пользователя по имени
