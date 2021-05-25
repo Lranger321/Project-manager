@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     /**
-     * Находит пользователя по id
+     * Найти пользователя по id
      *
      * @param uuid - id пользователя
      * @return опционально пользователь
@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findById(@Param("uuid") UUID uuid);
 
     /**
-     * Находит пользователя по имени
+     * Найти пользователя по имени
      *
      * @param fullName - имя пользователя
      * @return опционально пользователь

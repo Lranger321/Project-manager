@@ -42,7 +42,7 @@ public class ProjectRepositoryTest {
      * Тест добавления проекта
      */
     @Test
-    public void testAddUser() throws Exception {
+    public void testAddProject() throws Exception {
         if (projectRepository.findByName("Babur").isPresent()) {
             Assert.assertEquals("Babur", projectRepository.findByName("Babur").get().getName());
         } else {
@@ -54,7 +54,7 @@ public class ProjectRepositoryTest {
      * Тест удаления проекта
      */
     @Test
-    public void testDelUser() throws Exception {
+    public void testDelProject() throws Exception {
         clearUp();
         Assert.assertTrue(!projectRepository.findByName("Babur").isPresent());
     }
@@ -63,7 +63,7 @@ public class ProjectRepositoryTest {
      * Тест обновления данных проекта
      */
     @Test
-    public void testSetUser() throws Exception {
+    public void testSetProject() throws Exception {
         if (projectRepository.findByName("Babur").isPresent()) {
             Project testProject = projectRepository.findByName("Babur").get();
             testProject.setStatus(ProjectStatus.DONE);
@@ -78,7 +78,7 @@ public class ProjectRepositoryTest {
      * Тест получения данных о проекте
      */
     @Test
-    public void testGetUser() throws Exception {
+    public void testGetProject() throws Exception {
         if (projectRepository.findByName("Babur").isPresent()) {
             Assert.assertEquals("Babur", projectRepository.findByName("Babur").get().getName());
         } else {

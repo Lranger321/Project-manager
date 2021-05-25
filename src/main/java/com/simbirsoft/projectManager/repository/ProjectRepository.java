@@ -13,10 +13,10 @@ import java.util.UUID;
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
     /**
-     * Находит проект по имени
+     * Найти проект по имени
      *
-     * @param name - имя пользователя
-     * @return опционально пользователь
+     * @param name - имя проекта
+     * @return опционально проект
      */
     @Query("SELECT u FROM Project u WHERE u.name = :name")
     Optional<Project> findByName(@Param("name") String name);
