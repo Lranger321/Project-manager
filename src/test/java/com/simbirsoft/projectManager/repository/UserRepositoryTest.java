@@ -1,7 +1,6 @@
-package com.simbirsoft.projectManager;
+package com.simbirsoft.projectManager.repository;
 
 import com.simbirsoft.projectManager.entity.User;
-import com.simbirsoft.projectManager.repository.UserRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -53,13 +52,12 @@ public class UserRepositoryTest {
         if (userRepository.findByFullName("Babur").isPresent()) {
             Assert.assertEquals("Babur", userRepository.findByFullName("Babur").get().getFullName());
         } else {
-            fail("Не удалость получит ползователя \"Babur\" из БД");
+            fail("Не удалость получить ползователя \"Babur\" из БД");
         }
     }
 
     /**
      * Тест удаления пользователя
-     * @throws Exception
      */
     @Test
     public void testDelUser() throws Exception {
@@ -73,13 +71,12 @@ public class UserRepositoryTest {
     @Test
     public void testSetUser() throws Exception {
         if (userRepository.findByFullName("Babur").isPresent()) {
-            User testUser = new User();
-            testUser = userRepository.findByFullName("Babur").get();
+            User testUser = userRepository.findByFullName("Babur").get();
             testUser.setEmail("babur@yandex.com");
             userRepository.save(testUser);
             Assert.assertEquals("babur@yandex.com", userRepository.findByFullName("Babur").get().getEmail());
         } else {
-            fail("Не удалость получит ползователя \"Babur\" из БД");
+            fail("Не удалость получить ползователя \"Babur\" из БД");
         }
     }
 
@@ -91,7 +88,7 @@ public class UserRepositoryTest {
         if (userRepository.findByFullName("Babur").isPresent()) {
             Assert.assertEquals("Babur", userRepository.findByFullName("Babur").get().getFullName());
         } else {
-            fail("Не удалость получит ползователя \"Babur\" из БД");
+            fail("Не удалость получить ползователя \"Babur\" из БД");
         }
     }
 }
