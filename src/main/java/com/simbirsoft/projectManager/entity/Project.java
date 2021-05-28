@@ -3,6 +3,7 @@ package com.simbirsoft.projectManager.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,6 +38,9 @@ public class Project {
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<User> users = new HashSet<>();
 
+    @OneToMany(mappedBy = "project")
+    private List<ProjectToUser> projectToUsers;
+
     public Project() {
     }
 
@@ -45,6 +49,14 @@ public class Project {
         this.status = status;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+    }
+
+    public List<ProjectToUser> getProjectToUsers() {
+        return projectToUsers;
+    }
+
+    public void setProjectToUsers(List<ProjectToUser> projectToUsers) {
+        this.projectToUsers = projectToUsers;
     }
 
     public UUID getId() {

@@ -20,16 +20,4 @@ public enum RoleEnum {
 //            .collect(Collectors.toSet());
 //  }
 
-    @Override
-    public String toString() {
-        switch (this) {
-            case ADMIN:
-                return "admin";
-            case USER:
-                return "user";
-            default:
-                return "";
-
-        }
-    }
 }

@@ -4,6 +4,7 @@ import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.repository.ProjectRepository;
 import com.simbirsoft.projectManager.repository.TaskRepository;
+import com.simbirsoft.projectManager.service.ProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,13 @@ public class ProjectPageController {
 
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
+    private final ProjectService projectService;
 
     @Autowired
-    public ProjectPageController(ProjectRepository projectRepository, TaskRepository taskRepository) {
+    public ProjectPageController(ProjectRepository projectRepository, TaskRepository taskRepository, ProjectService projectService) {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
+        this.projectService = projectService;
     }
 
     @GetMapping("/project/{id}")

@@ -3,6 +3,7 @@ package com.simbirsoft.projectManager.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,6 +27,17 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @OneToMany(mappedBy = "user")
+    private List<ProjectToUser> projectToUsers;
+
+    @OneToMany
+    @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Project> projects = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
+    private Set<Task> taskEntities = new HashSet<>();
+
 //    @Enumerated(value = EnumType.STRING)
 //    @Column(name = "roles")
 //    private String role;
@@ -39,13 +51,13 @@ public class User {
 //    }
     //     if we will keep the role in user table
 
-    @OneToMany
-    @JoinTable(name = "project_to_user", joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    private Set<Project> projects = new HashSet<>();
+    public List<ProjectToUser> getProjectToUsers() {
+        return projectToUsers;
+    }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
-    private Set<Task> taskEntities = new HashSet<>();
+    public void setProjectToUsers(List<ProjectToUser> projectToUsers) {
+        this.projectToUsers = projectToUsers;
+    }
 
     public UUID getId() {
         return id;
