@@ -2,6 +2,7 @@ package com.simbirsoft.projectManager.repository;
 
 import com.simbirsoft.projectManager.entity.Project;
 import com.simbirsoft.projectManager.entity.ProjectStatus;
+import com.simbirsoft.projectManager.entity.RoleEnum;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,6 +11,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.fail;
 
@@ -84,5 +88,22 @@ public class ProjectRepositoryTest {
         } else {
             fail("Не удалость получить проект \"Babur\" из БД");
         }
+    }
+
+    @Test
+    public void testGetUserRoleInProject() throws Exception {
+
+        UUID userId = UUID.fromString("749c62bc-f960-4511-961f-ffa98c655cec");
+        UUID ProjectId = UUID.fromString("749c62bc-f960-4511-961f-ffa98c655cef");
+        Optional<String> testRole = projectRepository.findUserRoleInProject(userId, ProjectId);
+        if (testRole.isPresent()) {
+            System.out.println("Role is " + testRole.get());
+        }
+
+        RoleEnum adminRole = RoleEnum.ADMIN;
+        RoleEnum userRole = RoleEnum.USER;
+
+        System.out.println(adminRole);
+        System.out.println(userRole);
     }
 }

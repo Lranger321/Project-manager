@@ -46,13 +46,13 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindByEmail() {
+    public void testFindByEmail() throws Exception {
         UserResponse userResponse = userService.findByEmail("babur@google.com");
         Assert.assertEquals("Babur", userResponse.getName());
     }
 
     @Test
-    public void testRegisterUser() {
+    public void testRegisterUser() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
         userRegisterRequest.setFullName("Eugenio");
         userRegisterRequest.setPassword("111");
@@ -66,7 +66,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUser() {
+    public void testUpdateUser() throws Exception {
         UserResponse userResponse = userService.findByEmail("babur@google.com");
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
         userRegisterRequest.setFullName("Eugenio");
