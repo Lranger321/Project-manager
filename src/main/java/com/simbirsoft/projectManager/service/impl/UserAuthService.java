@@ -25,7 +25,7 @@ public class UserAuthService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) {
         Optional<User> user = repository.findByEmail(email);
-        if (user.isPresent() ) {
+        if (user.isPresent()) {
             return new org.springframework.security.core.userdetails.User(user.get().getFullName(),
                     user.get().getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER")));
         }
