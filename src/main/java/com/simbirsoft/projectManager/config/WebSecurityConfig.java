@@ -43,6 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/register").permitAll()
+                .antMatchers(
+                        "/foundInWikipedia/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()

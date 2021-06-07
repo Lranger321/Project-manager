@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.UUID;
@@ -24,13 +21,11 @@ public class IndexPageController {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexPageController.class);
 
-    private final ProjectService projectService;
     private final ProjectRepository projectRepository;
 
     @Autowired
-    public IndexPageController(ProjectRepository projectRepository, ProjectService projectService) {
+    public IndexPageController(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
-        this.projectService = projectService;
     }
 
     @GetMapping
@@ -42,9 +37,21 @@ public class IndexPageController {
         return "index";
     }
 
+    @GetMapping("/findOne")
+    @ResponseBody
+    public Project findOne(String id) {
+        return projectRepository.findById(UUID.fromString(id)).get();
+    }
+
     @PostMapping
     public String newProject(Project project, Principal principal) {
         logger.info("User name: {}", principal.getName());
+        projectRepository.save(project);
+        return "redirect:/";
+    }
+
+    @PostMapping("/save")
+    public String save(Project project) {
         projectRepository.save(project);
         return "redirect:/";
     }

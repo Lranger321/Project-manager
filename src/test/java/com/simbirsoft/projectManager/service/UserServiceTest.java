@@ -4,7 +4,6 @@ import com.simbirsoft.projectManager.entity.User;
 import com.simbirsoft.projectManager.repository.UserRepository;
 import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
 import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
-import com.simbirsoft.projectManager.service.impl.UserServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,10 +23,10 @@ import java.util.UUID;
 public class UserServiceTest {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Before
     public void setUp() {

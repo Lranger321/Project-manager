@@ -12,6 +12,9 @@ import java.util.UUID;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
+    @Override
+    Optional<Project> findById(UUID uuid);
+
     /**
      * Найти проект по имени
      *
