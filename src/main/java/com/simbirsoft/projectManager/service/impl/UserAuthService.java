@@ -23,14 +23,13 @@ public class UserAuthService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        Optional<User> user = repository.findByFullName(username);
+    public UserDetails loadUserByUsername(String email) {
+        Optional<User> user = repository.findByEmail(email);
         if (user.isPresent()) {
-            return new org.springframework.security.core.userdetails.User(user.get().getFullName(), user.get().getPassword(),
-                    Collections.singletonList(new SimpleGrantedAuthority("USER")));
+            return new org.springframework.security.core.userdetails.User(user.get().getFullName(),
+                    user.get().getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER")));
         }
-        throw new NotFoundException(User.class, "fullName", username);
-        /*return new org.springframework.security.core.userdetails.User("babur", "asasa",
-                Collections.singletonList(new SimpleGrantedAuthority("USER")));*/
+        throw new NotFoundException(User.class, "fullName", email);
     }
+    //if we will keep the role in user table new SimpleGrantedAuthority(user.get().getRole()))
 }

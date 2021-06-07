@@ -1,10 +1,11 @@
 package com.simbirsoft.projectManager.service.impl;
 
-import com.simbirsoft.projectManager.dto.request.TaskRequest;
-import com.simbirsoft.projectManager.dto.response.TaskResponse;
+import com.simbirsoft.projectManager.rest.dto.request.ChangeTaskStatusRequest;
 import com.simbirsoft.projectManager.entity.Task;
 import com.simbirsoft.projectManager.exception.NotFoundException;
 import com.simbirsoft.projectManager.repository.TaskRepository;
+import com.simbirsoft.projectManager.rest.dto.request.TaskRequest;
+import com.simbirsoft.projectManager.rest.dto.response.TaskResponse;
 import com.simbirsoft.projectManager.service.TaskService;
 import com.simbirsoft.projectManager.utils.mapper.TaskMapper;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,18 @@ public class TaskServiceImpl implements TaskService {
             throw new NotFoundException(Task.class, "id", id);
         }
         taskRepository.deleteById(uuid);
+        return true;
+    }
+
+    @Override
+    public boolean changeStatus(ChangeTaskStatusRequest request) {
+        Optional<Task> taskOptional = taskRepository.findById(request.getId());
+        if (taskOptional.isEmpty()) {
+            throw new NotFoundException(Task.class, "id", request.getId().toString());
+        }
+        Task task = taskOptional.get();
+        task.setStatus(request.getStatus());
+        taskRepository.save(task);
         return true;
     }
 }

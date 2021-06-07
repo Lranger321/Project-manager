@@ -1,7 +1,7 @@
-package com.simbirsoft.projectManager.controller;
+package com.simbirsoft.projectManager.rest.controller;
 
-import com.simbirsoft.projectManager.dto.request.UserRegisterRequest;
-import com.simbirsoft.projectManager.dto.response.UserResponse;
+import com.simbirsoft.projectManager.rest.dto.request.UserRegisterRequest;
+import com.simbirsoft.projectManager.rest.dto.response.UserResponse;
 import com.simbirsoft.projectManager.exception.BadRequestException;
 import com.simbirsoft.projectManager.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,13 +20,6 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @Operation(summary = "Авторизация пользователя")
-    @PostMapping("/login")
-    public ResponseEntity<Boolean> login() {
-        // TODO: complete login through Spring Security
-        return ResponseEntity.ok(false);
     }
 
     @Operation(summary = "Регистрация пользователя")

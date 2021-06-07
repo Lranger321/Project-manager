@@ -13,10 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//TODO Закомментировал до появления шаблонов
+
 @Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserAuthService userAuthService;
@@ -39,26 +39,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers(
+                        "/register").permitAll()
+                .antMatchers(
+                        "/foundInWikipedia/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/authenticateTheUser")
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/authenticateTheUser")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/login")
-                .permitAll();
+                    .logout()
+                    .logoutSuccessUrl("/login")
+                    .permitAll();
 
     }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userAuthService);
         authenticationProvider.setPasswordEncoder(getPasswordEncoder());
+        authenticationProvider.setUserDetailsService(userAuthService);
         return authenticationProvider;
     }
 }
