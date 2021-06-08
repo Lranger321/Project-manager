@@ -10,13 +10,24 @@ public enum ProjectStatus {
     /**
      * Не начат
      */
-    NOT_STARTED,
+    NOT_STARTED("Не начат"),
     /**
      * В разработке
      */
-    IN_PROGRESS,
+    IN_PROGRESS("В разработке"),
     /**
      * Завершён
      */
-    DONE
+    DONE("Завершён");
+
+    private final String name;
+
+    ProjectStatus(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
 }

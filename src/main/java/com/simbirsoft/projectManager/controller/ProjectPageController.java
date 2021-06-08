@@ -40,13 +40,11 @@ public class ProjectPageController {
     public String projectPage(@PathVariable("id") UUID id, Model model, Principal principal) {
         logger.info("User name: {}", principal.getName());
         logger.info("Project id: {}", id);
-
         Project bufProject = new Project();
         if (projectRepository.findById(id).isPresent()) {
             bufProject = projectRepository.findById(id).get();
         }
         model.addAttribute("project", bufProject);
-
         model.addAttribute("tasks", taskRepository.findAll());
         model.addAttribute("task", new Task());
         return "project";
@@ -58,7 +56,7 @@ public class ProjectPageController {
         logger.info("Project id: {}", id);
         task.setProject(projectRepository.findById(id).get());
         taskRepository.save(task);
-        return "redirect:/project/" + id.toString();
+        return "redirect:/project/" + id;
     }
 
     @DeleteMapping("/project/{id}")
